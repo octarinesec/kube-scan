@@ -8,7 +8,7 @@ kubectl apply -f https://raw.githubusercontent.com/octarinesec/octaudit/master/o
 kubectl port-forward --namespace octaudit svc/octaudit-ui 8080:80
 ```
 
-Then set your browswr to `http://localhost:8080`.
+Then set your browser to `http://localhost:8080`.
 
 ## Using a load-balancer service
 ```bash
