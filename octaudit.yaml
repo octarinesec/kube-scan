@@ -209,7 +209,7 @@ spec:
             - name: API_SERVER_PORT
               value: "80"
             - name: CONTACT_LINK
-              value: "mailto:info@octarinesec?subject=Octarine%20Contact%20Request"
+              value: "mailto:info@octarinesec.com?subject=Octarine%20Contact%20Request"
             - name: WEBSITE_LINK
               value: "https://www.octarinesec.com"
         - name: octaudit
