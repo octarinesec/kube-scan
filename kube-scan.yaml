@@ -203,7 +203,7 @@ spec:
     spec:
       containers:
         - name: kube-scan-ui
-          image: octarinesec/octaudit-ui:latest
+          image: octarinesec/octaudit_ui:latest
           imagePullPolicy: Always
           env:
             - name: API_SERVER_PORT
