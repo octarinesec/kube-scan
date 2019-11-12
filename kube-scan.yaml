@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: octaudit
+  name: kube-scan
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: octaudit
-  namespace: octaudit
+  name: kube-scan
+  namespace: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 data:
     risk-config.yaml: |
       lowRange:
@@ -145,17 +145,17 @@ data:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: octaudit
-  namespace: octaudit
+  name: kube-scan
+  namespace: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
-  name: octaudit
+  name: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 rules:
   - apiGroups:
       - ''
@@ -174,36 +174,36 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
-  name: octaudit
+  name: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: octaudit
+  name: kube-scan
 subjects:
   - kind: ServiceAccount
-    name: octaudit
-    namespace: octaudit
+    name: kube-scan
+    namespace: kube-scan
 
 ---
 
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: octaudit
-  namespace: octaudit
+  name: kube-scan
+  namespace: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 spec:
   template:
     metadata:
       labels:
-        app: octaudit
+        app: kube-scan
     spec:
       containers:
-        - name: octaudit-ui
-          image: octarinesec/octaudit_ui:latest
+        - name: kube-scan-ui
+          image: octarinesec/octaudit-ui:latest
           imagePullPolicy: Always
           env:
             - name: API_SERVER_PORT
@@ -212,7 +212,7 @@ spec:
               value: "mailto:info@octarinesec.com?subject=Octarine%20Contact%20Request"
             - name: WEBSITE_LINK
               value: "https://www.octarinesec.com"
-        - name: octaudit
+        - name: kube-scan
           command:
             - "/octaudit"
           env:
@@ -230,23 +230,23 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: octaudit
+            name: kube-scan
             defaultMode: 420
-      serviceAccountName: octaudit
+      serviceAccountName: kube-scan
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: octaudit-ui
-  namespace: octaudit
+  name: kube-scan-ui
+  namespace: kube-scan
   labels:
-    app: octaudit
+    app: kube-scan
 spec:
   ports:
-    - name: octaudit-ui
+    - name: kube-scan-ui
       port: 80
       protocol: TCP
       targetPort: 8080
   selector:
-    app: octaudit
+    app: kube-scan
   type: ClusterIP
