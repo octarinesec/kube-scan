@@ -80,12 +80,6 @@ data:
           shortDescription: ""
           description: "SELinux (RedHat-based distributions) and AppArmor (Debian-based distributions) provides access control policies. They can be used to restrict how processes can communicate"
           handler: "IsSelinux"
-        - name: "AppArmor"
-          score: 0.4
-          title: "Workload containers AppArmor enabled"
-          shortDescription: ""
-          description: "SELinux (RedHat-based distributions) and AppArmor (Debian-based distributions) provides access control policies. They can be used to restrict how processes can communicate"
-          handler: "IsAppArmor"
         - name: "IngressPolicy"
           score: 0.6
           title: "Workload has ingress policy configured"
