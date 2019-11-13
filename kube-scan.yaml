@@ -209,6 +209,7 @@ spec:
         - name: kube-scan
           command:
             - "/octaudit"
+            - "-logtostderr=true"
           env:
             - name: OCTAUDIT_PORT
               value: "80"
