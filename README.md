@@ -13,7 +13,7 @@ Then set your browser to `http://localhost:8080`.
 ## Using a load-balancer service
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/octarinesec/kube-scan/master/kube-scan-lb.yaml
-kubectl -n kube-scan get service kube-scan-ui -o json path={..hostname}
+kubectl -n kube-scan get service kube-scan-ui -o jsonpath={..hostname}
 ```
 
 Then set your browser to that hostname.
