@@ -1,6 +1,6 @@
 # Kube-Scan
 Octarine k8s cluster risk assesment tool  
-https://www.octarinesec.com
+https://info.octarinesec.com/kube-scan
 
 ## Quickstart
 ```bash
