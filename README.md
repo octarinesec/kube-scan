@@ -1,6 +1,5 @@
 # Kube-Scan
-Octarine k8s cluster risk assesment tool  
-https://info.octarinesec.com/kube-scan
+Try our free Kubernetes risk assessment tool today. No data leaves your cluster. We do not collect any information. Run it on any cluster at any time. See everything you need to get started below. For more information on Octarine head to https://www.octarinesec.com. 
 
 ## Quickstart
 ```bash
