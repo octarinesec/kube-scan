@@ -16,3 +16,9 @@ kubectl -n kube-scan get service kube-scan-ui -o jsonpath={..hostname}
 ```
 
 Then set your browser to that hostname.
+
+# Screenshots
+
+![Risk score](https://info.octarinesec.com/hubfs/kube-scan.png)
+
+![Risk details](https://info.octarinesec.com/hubfs/kube-scan-risk.png)
