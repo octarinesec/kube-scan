@@ -10,6 +10,7 @@ kubectl port-forward --namespace kube-scan svc/kube-scan-ui 8080:80
 Then set your browser to `http://localhost:8080`.
 
 ## Using a load-balancer service
+* This method assumes you are using a cloud provider that provides load balancers.
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/octarinesec/kube-scan/master/kube-scan-lb.yaml
 ```
