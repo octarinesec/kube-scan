@@ -190,6 +190,9 @@ metadata:
   labels:
     app: kube-scan
 spec:
+  selector:
+    matchLabels:
+      app: kube-scan
   template:
     metadata:
       labels:

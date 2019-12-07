@@ -182,7 +182,7 @@ subjects:
 
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-scan
@@ -190,6 +190,9 @@ metadata:
   labels:
     app: kube-scan
 spec:
+  selector:
+    matchLabels:
+      app: kube-scan
   template:
     metadata:
       labels:
