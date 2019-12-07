@@ -12,128 +12,286 @@ metadata:
     app: kube-scan
 data:
     risk-config.yaml: |
-      lowRange:
-        minScore: 0
-        maxScore: 3.5
-      mediumRange:
-        minScore: 3.5
-        maxScore: 7
-      highRange:
-        minScore: 7
-        maxScore: 10
-      totalRange:
-        minScore: 0
-        maxScore: 10
+      expConst: 9
+      impactConst: 4
+      attackVector:
+        remote: 0.85
+        local: 0.55
+      exploitability:
+        high: 0.54
+        moderate: 0.4
+        low: 0.1
+        veryLow: 0.05
+      scopeFactor:
+        none: 0.25
+        host: 1
+        cluster: 1
+      ciaScore:
+        high: 0.56
+        low: 0.22
+        none: 0
+      riskCategory:
+        min: 0
+        low: 3
+        medium: 7
+        max: 10
+      individualRiskCategory:
+        min: 0
+        low: 3
+        medium: 5
+        max: 10
       basic:
         - name: "privileged"
-          score: 6
           title: "Workload is privileged"
           shortDescription: "Processes inside a privileged containers get full access to the host"
-          description: "Processes inside a privileged containers get full access to the host. A malicious, or library, can compromise the host and the entire cluster"
+          description: "Privileged containers get access to all devices on the host. This is equivalent to running an application on the host itself. There is no more isolation of the container"
+          confidentiality: "High"
+          confidentialityDescription: "Privileged containers may have the options to read and modify any applications such as Docker, Kubernetes, etc"
+          integrity: "Low"
+          integrityDescription: "Processes inside a privileged containers get full access to the code. A malicious, or library, can compromise the host and the entire cluster"
+          availability: "Low"
+          availabilityDescription: "Processes inside a privileged containers may have the ability to modify or stop Kubernetes, Docker and other applications"
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsPrivileged"
         - name: "runningAsRoot"
-          score: 4
           title: "Workload has container/s running as root"
           shortDescription: "Processes in container running as root may be able to escape their container"
-          description: "Processes in container running as root may be able to escape their container and perform malicious actions on the host"
+          description: "The container is set to run as the root user. Vulnerabilities in Docker (several were found previously) may allow a container escape and full access to the host"
+          confidentiality: "High"
+          confidentialityDescription: "Root processes that can escape the containers have the ability to read secrets from Kubernetes, Docker and other applications"
+          integrity: "Low"
+          integrityDescription: "Processes in container running as root may be able to escape their container and perform malicious actions on the host"
+          availability: "Low"
+          availabilityDescription: "Root processes that can escape the containers have the ability to modify or stop Kubernetes, Docker and other applications"
+          exploitability: "Low"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsRunningAsRoot"
         - name: "AllowProvilegeEscalation"
-          score: 2
           shortDescription: "Privilege escalation allows programs inside the container to run as root"
-          description: "Privilege escalation allows programs inside the container to run as root, even if the main process is not root"
+          description: "Privilege escalation allows the processes in the container to get additional privileges"
           title: "Workload allows privilege escalation"
+          confidentiality: "Low"
+          confidentialityDescription: "Root processes that can escape the containers have the ability to read secrets from Kubernetes, Docker and other applications"
+          integrity: "Low"
+          integrityDescription: "Processes in container running as root may be able to escape their container and perform malicious actions on the host"
+          availability: "Low"
+          availabilityDescription: "Root processes that can escape the containers have the ability to modify or stop Kubernetes, Docker and other applications"
+          exploitability: "VeryLow"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsPrivilegedEscalation"
         - name: "CapNetRaw"
-          score: 1
           title: "Workload has container/s with NET_RAW capability"
           shortDescription: "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet"
           description: "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death"
+          confidentiality: "High"
+          confidentialityDescription: "This capability enables ARP spoofing from the container, UDP packets with forged source IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network"
+          integrity: "None"
+          integrityDescription: ""
+          availability: "Low"
+          availabilityDescription: "This capability enables the container to craft malicious raw packet such as Ping of Death"
+          exploitability: "Low"
+          attackVector: "Local"
+          scope: "Cluster"
           handler: "IsCapNetRaw"
         - name: "WritableFileSystem"
-          score: 2
           title: "Workload has container/s with writable file system"
           shortDescription: "Writable File System allows the persistence of threats"
-          description: "Writable File System allows threats to persist through restart and upgrades of the container"
+          description: "Read-only file system enforce immutable containers. A malicious process inside the container can use a writable file system to store or manipulate data inside the container"
+          confidentiality: "None"
+          confidentialityDescription: ""
+          integrity: "Low"
+          integrityDescription: "This allows malicious processes to write data to disk, making it easier to drop and execute external malicious code"
+          availability: "None"
+          availabilityDescription: ""
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "None"
           handler: "IsWritableFileSystem"
         - name: "UnmaskedProcMount"
-          score: 5
           title: "Workload expose unsafe parts of /proc"
           shortDescription: "Full access to /proc can reveal information about the host and other containers\n/proc/sys allows a privileged user to change the kernel parameters are runtime"
-          description: "A container with full access to the host /proc can retrieve information about all activities and users on the host\n/proc/sys allows a privileged user to change the kernel parameters are runtime which may impact how resources are shared amongst containers"
+          description: "/proc contains information about all network connections on the host, the file system and permissions, running processes, etc"
+          confidentiality: "Low"
+          confidentialityDescription: "/proc contains information about all network connections on the host, the file system and permissions, running processes, etc"
+          integrity: "None"
+          integrityDescription: ""
+          availability: "High"
+          availabilityDescription: "/proc/sys allows a privileged user to change the kernel parameters are runtime which may impact how resources are shared amongst containers"
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsUnmaskedProcMount"
         - name: "AllowedUnsafeSysctls"
-          score: 4
           title: "Workload allows unsafe sysctls"
-          shortDescription: "Some of the sysctl interfaces allows the container to affect other containers and/or the host"
+          shortDescription: "Sysctl allows users to modify the kernel settings at run time: networking, memory, etc. Some sysctl interfaces can affect other containers, the host or bypass the CPU quota attributed to the container"
           description: "Some of the sysctl interfaces allows the container to grab more CPU resources than allowed by its quota. This may starve other containers from CPU cycles"
+          confidentiality: "None"
+          confidentialityDescription: ""
+          integrity: "Low"
+          integrityDescription: "Some of the sysctl interfaces allows the container to affect other containers and/or the host"
+          availability: "High"
+          availabilityDescription: "Some of the sysctl interfaces allows the container to grab more CPU resources than allowed by its quota. This may starve other containers from CPU cycles"
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsAllowedUnsafeSysctls"
-      remediation:
-        - name: "seccomp"
-          score: 0.2
-          title: "Workload containers have seccomp policy"
-          shortDescription: ""
-          description: "A seccomp policy specify which system class can be called by the application. It is a sandboxing technique that reduces the chance that a kernel vulnerability will be successfully exploited"
-          handler: "IsSecComp"
-        - name: "selinux"
-          score: 0.4
-          title: "Workload containers SELlinux enabled"
-          shortDescription: ""
-          description: "SELinux (RedHat-based distributions) and AppArmor (Debian-based distributions) provides access control policies. They can be used to restrict how processes can communicate"
-          handler: "IsSelinux"
-        - name: "IngressPolicy"
-          score: 0.6
-          title: "Workload has ingress policy configured"
-          shortDescription: ""
-          description: "A good ingress network policy would prevent external IPs to access a workload accidentally exposed to the host IP"
-          handler: "IsIngressPolicy"
-        - name: "EgressPolicy"
-          score: 0.8
-          title: "Workload has egress policy configured"
-          shortDescription: ""
-          description: "An egress network policy can prevent the workload to be leveraged to perform lateral movement and data ex-filtration"
-          handler: "IsEgressPolicy"
-      aggravation:
+        - name: "notConfiguredCpuOrMemoryLimit"
+          title: "Workload has a container which its CPU or Memory limit was not configured"
+          shortDescription: "CPU and Memory quotas prevent container from grabbing too many resources from the node, and allow a better scheduling of resources across the cluster"
+          description: "CPU and Memory quotas prevent container from grabbing too many resources from the node, and allow a better scheduling of resources across the cluster"
+          confidentiality: "None"
+          confidentialityDescription: ""
+          integrity: "None"
+          integrityDescription: ""
+          availability: "High"
+          availabilityDescription: "Workloads with no CPU or memory quota may starve off other workloads on the node, resulting in pods ejections and cascading reschedule of pods on other nodes"
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
+          handler: "IsNotConfiguredCpuOrMemoryLimit"
+        - name: "mountingOSDirectoryRW"
+          title: "Workload is mounting a volume with OS Directory write permissions"
+          shortDescription: "Containers can mount sensitive folders from the hosts, giving them potential dangerous access critical host configurations and binaries"
+          description: "Containers can mount sensitive folders from the hosts, giving them potential dangerous access critical host configurations and binaries"
+          confidentiality: "High"
+          confidentialityDescription: "Sharing sensitive folders and files such as / (root), /var/run/, etc., can allow the container to communicate with other host application such as a database"
+          integrity: "High"
+          integrityDescription: "Sharing sensitive folders and files such as / (root),  /var/run/, docker.sock, etc. can allow the container to reconfigure the Kubernetes clusters, run new container images, etc"
+          availability: "Low"
+          availabilityDescription: "Sharing sensitive folders and files such as / (root),  /var/run/, docker.sock, etc. can allow the container to reconfigure the container quotas, run new container images, etc"
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
+          handler: "IsMountingOSDirectoryRW"
+        - name: "mountingOSDirectoryRO"
+          title: "Workload is mounting a volume with OS Directory read-only permissions"
+          shortDescription: "Containers can mount sensitive folders from the hosts, giving them potential dangerous access critical host configurations"
+          description: "Containers can mount sensitive folders from the hosts, giving them potential dangerous access critical host configurations"
+          confidentiality: "Low"
+          confidentialityDescription: "Sharing sensitive folders and files such as /etc, /var/run/, etc., can allow the container to read secrets"
+          integrity: "None"
+          integrityDescription: ""
+          availability: "None"
+          availabilityDescription: ""
+          exploitability: "Low"
+          attackVector: "Local"
+          scope: "Host"
+          handler: "IsMountingOSDirectoryRO"
+        - name: "capSysAdmin"
+          title: "Workload has container/s with CAP_SYS_ADMIN capability"
+          shortDescription: "CAP_SYS_ADMIN is the most privileged capability with over 150 privileged system calls allowed"
+          description: "CAP_SYS_ADMIN is the most privileged capability with over 150 privileged system calls allowed"
+          confidentiality: "High"
+          confidentialityDescription: "CAP_SYS_ADMIN gives privileges equivalent to running as root. Processes in container running as root may be able to escape their container and perform malicious actions on the host"
+          integrity: "None"
+          integrityDescription: ""
+          availability: "None"
+          availabilityDescription: ""
+          exploitability: "Moderate"
+          attackVector: "Local"
+          scope: "Host"
+          handler: "IsCapSysAdmin"
         - name: "ExposedByLoadBalancer"
-          score: 2
           title: "Workload is exposed through a load balancer"
           shortDescription: "The service is accessible from other networks and/or from the Internet"
-          description: "The service is accessible from other networks and/or from the Internet"
+          description: "The workload is exposed to adjacent network and/or to the internet through an external Load Balancer"
+          confidentiality: "High"
+          confidentialityDescription: "Accidental exposure of sensitive services may lead to the exfiltration of confidential data through remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          integrity: "Low"
+          integrityDescription: "Services open to the internet may be used to access unprotected services (lateral movements) by leveraging remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          availability: "High"
+          availabilityDescription: "Accidental exposure to the Internet can make the workload susceptible to DoS attacks from random attackers"
+          exploitability: "Moderate"
+          attackVector: "Remote"
+          scope: "None"
           handler: "IsExposedByLoadBalancer"
         - name: "ExposedByNodePort"
-          score: 2
           title: "Workload is exposed through a node port"
           shortDescription: "The service is accessible from other networks and/or from the Internet"
-          description: "The service is accessible from other networks and/or from the Internet"
+          description: "The workload is exposed to adjacent network and/or to the internet through a Node Port"
+          confidentiality: "High"
+          confidentialityDescription: "Accidental exposure of sensitive services may lead to the exfiltration of confidential data through remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          integrity: "Low"
+          integrityDescription: "Services open to the internet may be used to access unprotected services (lateral movements) by leveraging remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          availability: "High"
+          availabilityDescription: "Accidental exposure to the Internet can make the workload susceptible to DoS attacks from random attackers"
+          exploitability: "Moderate"
+          attackVector: "Remote"
+          scope: "None"
           handler: "IsExposedByNodePort"
         - name: "ExposedByIngress"
-          score: 1.5
           title: "Workload is exposed through an ingress"
           shortDescription: "The service is accessible from other networks and/or from the Internet"
-          description: "The service is accessible from other networks and/or from the Internet"
+          description: "The workload is exposed to adjacent network and/or to the internet through an Ingress controller"
+          confidentiality: "High"
+          confidentialityDescription: "Accidental exposure of sensitive services may lead to the exfiltration of confidential data through remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          integrity: "Low"
+          integrityDescription: "Services open to the internet may be used to access unprotected services (lateral movements) by leveraging remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          availability: "Low"
+          availabilityDescription: "Accidental exposure to the Internet can make the workload susceptible to DoS attacks from random attackers"
+          exploitability: "Moderate"
+          attackVector: "Remote"
+          scope: "None"
           handler: "IsExposedByIngress"
         - name: "HostPort"
-          score: 1.7
           title: "Workload is exposed through a shared host port"
           shortDescription: "The service is accessible from other networks and/or from the Internet"
-          description: "The service is accessible from other networks and/or from the Internet"
+          description: "This container setting binds the container listening port to the IP address of the host. This exposes the pod to adjacent networks and/or to the Internet\nThe workload is exposed to adjacent network and/or to the internet through a shared host port binding"
+          confidentiality: "High"
+          confidentialityDescription: "This setting binds the workload listening IP address to the host IP, making the service accessible from other networks and/or from the Internet"
+          integrity: "Low"
+          integrityDescription: "Services open to the internet may be used to access unprotected services (lateral movements) by leveraging remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          availability: "High"
+          availabilityDescription: "Accidental exposure to the Internet can make the workload susceptible to DoS attacks from random attackers"
+          exploitability: "High"
+          attackVector: "Remote"
+          scope: "None"
           handler: "IsHostPort"
         - name: "ShareHostNetwork"
-          score: 1.7
           title: "Workload is exposed through a shared host network"
           shortDescription: "The service is accessible from other networks and/or from the Internet\nShare Host Network allows containers to sniff traffic from host and other containers"
-          description: "The service is accessible from other networks and/or from the Internet\nShare Host Network allows containers to sniff traffic from host and other containers"
+          description: "This SecurityContext setting allows the workload to share the same network namespace as the host"
+          confidentiality: "High"
+          confidentialityDescription: "This allows the network to listen to the loopback interface and sniff the traffic from and to other pods. This setting also allows workloads to bind their listening IP address to the host IP, making the service accessible from other networks and/or from the Internet"
+          integrity: "Low"
+          integrityDescription: "Services open to the internet may be used to access unprotected services (lateral movements) by leveraging remote code vulnerabilities, vulnerable third-party libraries or vulnerable OS services"
+          availability: "High"
+          availabilityDescription: "Accidental exposure to the Internet can make the workload susceptible to DoS attacks from random attackers"
+          exploitability: "Low"
+          attackVector: "Remote"
+          scope: "Host"
           handler: "IsShareHostNetwork"
         - name: "ShareHostPID"
-          score: 1.3
           title: "Workload is exposed through a shared host PID"
           shortDescription: "Share Host Pid allow  containers to manipulate other container processes"
-          description: "Each container can manipulate other container processes, inject malicious code, modify /proc, etc. A malicious container can do lateral movements by infecting other containers on the same host"
+          description: "Shared host PIDs enable the sharing of processes with the host and other containers"
+          confidentiality: "Low"
+          confidentialityDescription: "Each container has access to password, secrets, certificates, etc. read by other containers"
+          integrity: "Low"
+          integrityDescription: "Each container can manipulate other container processes, inject malicious code, modify /proc, etc. A malicious container can do lateral movements by infecting other containers on the same host"
+          availability: "Low"
+          availabilityDescription: "Each container can crash other container processes"
+          exploitability: "Low"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsShareHostPID"
         - name: "ShareHostIPC"
-          score: 1.5
           title: "Workload is exposed through a shared host IPC"
           shortDescription: "Shared Host IPC can leak confidential data sent from trusted applications"
-          description: "Communication between trusted application and untrusted applications (malicious third-pay library, rogue container) can leak confidential data"
+          description: "A shared host IPC allows processes to communicate between containers and with the host"
+          confidentiality: "High"
+          confidentialityDescription: "Communication between trusted application and untrusted applications (malicious third-party library, rogue container) can leak confidential data"
+          integrity: "Low"
+          integrityDescription: "Untrusted applications can change the behavior of trusted applications through shared memory namespaces by tampering with the memory"
+          availability: "Low"
+          availabilityDescription: "An untrusted application can use improper Inter-Process Communication to crash the destination process"
+          exploitability: "Low"
+          attackVector: "Local"
+          scope: "Host"
           handler: "IsShareHostIPC"
 ---
 apiVersion: v1
@@ -190,6 +348,9 @@ metadata:
   labels:
     app: kube-scan
 spec:
+  selector:
+    matchLabels:
+      app: kube-scan
   template:
     metadata:
       labels:
@@ -217,7 +378,7 @@ spec:
               value: "/etc/octaudit/risk-config.yaml"
             - name: OCTAUDIT_REFRESH_STATE_INTERVAL_MINUTES
               value: "1440"
-          image: octarinesec/octaudit-scanner:latest
+          image: octarinesec/octaudit-scanner:19.3
           imagePullPolicy: Always
           volumeMounts:
             - name: config
