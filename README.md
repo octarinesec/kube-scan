@@ -33,6 +33,6 @@ Then set your browser to that address.
 
 # Screenshots
 
-![Risk score](https://info.octarinesec.com/hubfs/kube-scan.png)
+![Risk score](https://info.octarinesec.com/hubfs/home-1.png)
 
-![Risk details](https://info.octarinesec.com/hubfs/kube-scan-risk.png)
+![Risk details](https://info.octarinesec.com/hubfs/risk-expanded.png)
