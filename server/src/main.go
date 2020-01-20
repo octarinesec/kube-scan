@@ -14,7 +14,7 @@ const (
 type ServiceConfig struct {
 	Port                        int    `default:"8080"`
 	RiskConfigFilePath          string `split_words:"true" required:"true"`
-	RefreshStateIntervalMinutes int    `split_words:"true" default:"1"` // 1 day
+	RefreshStateIntervalMinutes int    `split_words:"true" default:"1440"` // 1 day
 }
 
 func init() {

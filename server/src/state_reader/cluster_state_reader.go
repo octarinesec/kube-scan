@@ -6,11 +6,9 @@ import (
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/tools/clientcmd"
+	restclient "k8s.io/client-go/rest"
 	kt "kube-scan/kubernetes_trackers"
 	"kube-scan/state"
-	"os"
-	"path/filepath"
 )
 
 type ClusterStateReader struct {
@@ -35,18 +33,22 @@ type ClusterStateReader struct {
 func NewClusterStateReader() (*ClusterStateReader, error) {
 	kindToTrackerMap := kt.GetKindToTrackerMap("", "")
 
-	//kubeConfig, err := restclient.InClusterConfig()
+	//#################################
+	// use this in order to run from your local machine against your kubectl context
+	//#################################
+	
+	//kubeconfigpath := filepath.Join(
+	//	os.Getenv("HOME"), ".kube", "config",
+	//)
+	//kubeConfig, err := clientcmd.BuildConfigFromFlags("", kubeconfigpath)
 	//if err != nil {
-	//	glog.Errorf("error getting kube configs from InClusterConfig")
-	//	return nil, err
+	//	glog.Fatal("Error get configs")
 	//}
 
-	kubeconfigpath := filepath.Join(
-		os.Getenv("HOME"), ".kube", "config",
-	)
-	kubeConfig, err := clientcmd.BuildConfigFromFlags("", kubeconfigpath)
+	kubeConfig, err := restclient.InClusterConfig()
 	if err != nil {
-		glog.Fatal("Error get configs")
+		glog.Errorf("error getting kube configs from InClusterConfig")
+		return nil, err
 	}
 
 	client, err := kubernetes.NewForConfig(kubeConfig)
