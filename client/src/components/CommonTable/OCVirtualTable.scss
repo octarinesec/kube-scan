@@ -1,0 +1,38 @@
+.OCVirtualTable {
+   display: flex;
+   flex: 1;
+   flex-direction: column;
+
+   .ReactVirtualized__Grid {
+      outline: none;
+   }
+
+   .x-scroll-wrapper {
+      //overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      overflow-x: hidden;
+   }
+
+   .x-scroll-content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+   }
+
+   .header-wrapper {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: row;
+      align-self: start;
+      position: relative;
+      z-index: 2;
+   }
+
+   .yScroll {
+      position: relative;
+      z-index: 1;
+   }
+}

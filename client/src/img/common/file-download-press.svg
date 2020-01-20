@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/file-download-press</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/file-download-press" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Path-4" stroke="#795CA0" points="15.7470123 4 19.5737958 7.82678344 19.5737958 21.9358388 7 21.9358388 7 4"></polygon>
+        <polyline id="Path-5" stroke="#795CA0" points="19.5718455 7.39771838 16 7.39771838 16 4"></polyline>
+        <polygon id="Path-6" stroke="#795CA0" fill="#FFFFFF" transform="translate(8.623753, 13.000000) scale(-1, 1) translate(-8.623753, -13.000000) " points="14.6817276 13.1268616 8.55486607 7 8.55486607 11.0634308 2.56577785 11.0634308 2.56577785 15.2675564 8.55486607 15.2675564 8.55486607 19"></polygon>
+    </g>
+</svg>

@@ -1,0 +1,70 @@
+@import './commonStyles/styleVars.scss';
+@import './commonStyles/baseStyles.scss';
+
+
+.alert-count-tag {
+   display: inline-block;
+   height: 11px;
+   color: white;
+   font-size: 9px;
+   text-align: center;
+   font-weight: bold;
+   border-radius: 5px;
+   background-color: $alertColorMedium;
+   padding: 1px 7px;
+
+   &.blocked {
+      background-color: $alertColorHigh;
+   }
+}
+
+h5.empty-message {
+   font-size: 14px;
+   font-weight: 500;
+   margin: 20px 0 0 30px;
+   color: #666;
+   text-align: center;
+}
+
+
+h5.group-title {
+   @extend %group-title;
+}
+
+h6.group-subtitle {
+   @extend %group-subtitle;
+}
+
+
+.oc-table-tag-item {
+   @extend %tag-item;
+}
+
+.oc-table-method-item {
+   @extend %tag-item;
+   text-transform: uppercase;
+}
+
+.light-tooltip {
+   border-radius: 3px;
+   color: #555;
+   font-size: 9px;
+   padding: 3px 6px 3px 6px;
+   white-space: nowrap;
+   transition: opacity 200ms;
+   background-color: #fff;
+}
+
+.action-row-tooltip {
+   border-radius: 3px;
+   background-color: $purple1;
+   border-width: 1px;
+   border-style: solid;
+   border-color: #000;
+   color: #fff;
+   font-size: 9px;
+   font-weight: 600;
+   padding: 3px 6px 3px 6px;
+   white-space: nowrap;
+   transition: opacity 200ms;
+}

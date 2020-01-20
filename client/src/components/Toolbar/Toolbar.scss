@@ -1,0 +1,209 @@
+@import '../../commonStyles/styleVars';
+
+.Toolbar {
+
+   @import "../ContactButton/ContactButton";
+   .upper-toolbar.octaudit-toolbar {
+      background-color: #4b3a63;
+
+      .logo {
+         height: 25px;
+         width: 110px;
+         left: 0;
+         background-image: url('../../img/login/logo.svg');
+      }
+   }
+
+
+   flex: 0 0 auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+
+   .upper-toolbar {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      height: 64px;
+
+      .account {
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         color: #FEFFFF;
+         font-size: 18px;
+         line-height: 25px;
+         text-transform: uppercase;
+         transform: translate(-50%, -50%);
+      }
+
+      .buttonWrapper {
+         border-radius: 50%;
+         background-color: #EEE;
+         border: 1px solid #DAE0E2;
+         height: 52px;
+         width: 52px;
+      }
+
+      .logo {
+         height: 38px;
+         width: 167px;
+         position: relative;
+         left: 20px;
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-image: url('../../img/toolbar/logo-full.png');
+      }
+
+      .settings-icon {
+         width: 26px;
+         height: 26px;
+         background-position: center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         background-image: url('../../img/toolbar/settings-normal.svg');
+
+         &:hover {
+            background-image: url('../../img/toolbar/settings-hover.svg');
+         }
+         &:active,
+         &.selected {
+            background-image: url('../../img/toolbar/settings-press.svg');
+         }
+      }
+
+      .icon {
+         height: 30px;
+         width: 30px;
+         padding: 0px 8px;
+
+         cursor: pointer;
+         position: relative;
+
+         display: flex;
+         justify-content: center;
+         align-items: center;
+
+         & > svg > #Layer_1 > path {
+            transition: all .2s ease;
+         }
+      }
+
+      .section {
+         flex: 1;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+
+         &.right {
+            justify-content: flex-end;
+         }
+
+         &.center {
+            justify-content: center;
+         }
+      }
+
+   }
+
+   .lower-toolbar {
+      flex: 0 0 auto;
+      background-color: #8F51E4;
+      background-image: linear-gradient(90deg, #6C499C, #8F51E4 50%, #6C499C);
+      height: 25px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 2px 0 2px 0;
+
+      .breadcrumbs {
+         display: flex;
+         flex: 1 0;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         color: #fff;
+      }
+
+      .side-menu-toggle {
+         flex: 0 0 auto;
+         flex-direction: row;
+         width: 18px;
+         height: 18px;
+         position: relative;
+         margin-left: 8px;
+         transition: width 150ms;
+         transition-timing-function: ease-in-out;
+
+         .icon {
+            background-image: url('../../img/toolbar/side-menu-open.png');
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: transform 150ms;
+            transition-timing-function: ease-in-out;
+         }
+
+      }
+   }
+
+   $overlapSize: 20px;
+
+   .breadcrumb-item {
+      cursor: default;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.85);
+      background-color: #945add;
+      padding: 1px 12px 1px (10px + $overlapSize);
+      position: relative;
+      margin-left: -$overlapSize;
+      transition: opacity 100ms;
+      border-width: 1px;
+      border-color: rgba(0, 0, 0, 0.3);
+      border-style: solid;
+      border-radius: 20px;
+      font-weight: 500;
+      text-decoration: none;
+
+      &:last-child {
+         background-color: rgba(255, 255, 255, 0.8);
+         border-color: #fff;
+         font-weight: 600;
+         color: $purple2;
+      }
+
+      &:first-child {
+         padding-left: 11px;
+         margin-left: 0;
+      }
+
+      &:nth-child(1) {
+         z-index: 5;
+      }
+      &:nth-child(2) {
+         z-index: 4;
+      }
+      &:nth-child(3) {
+         z-index: 3;
+      }
+      &:nth-child(4) {
+         z-index: 2;
+      }
+      &:nth-child(5) {
+         z-index: 1;
+      }
+   }
+
+}
+
+
+
+

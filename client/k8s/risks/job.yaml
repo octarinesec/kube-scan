@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: echob-caller20
+spec:
+  parallelism: 1
+  template:
+    spec:
+      hostPID: true
+      containers:
+      - name: caller2
+        image: octarinesec/echo_server:latest
+        ports:
+          - containerPort: 5000
+            name: httpport
+            hostPort: 5000
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      restartPolicy: Never

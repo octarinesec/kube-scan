@@ -1,0 +1,246 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: octaudit
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: octaudit
+  namespace: octaudit
+  labels:
+    app: octaudit
+data:
+    risk-config.yaml: |
+      lowRange:
+        minScore: 0
+        maxScore: 3.5
+      mediumRange:
+        minScore: 3.5
+        maxScore: 7
+      highRange:
+        minScore: 7
+        maxScore: 10
+      totalRange:
+        minScore: 0
+        maxScore: 10
+      basic:
+        - name: "privileged"
+          score: 6
+          title: "Workload is privileged"
+          shortDescription: "Processes inside a privileged containers get full access to the host"
+          description: "Processes inside a privileged containers get full access to the host. A malicious, or library, can compromise the host and the entire cluster"
+          handler: "IsPrivileged"
+        - name: "runningAsRoot"
+          score: 4
+          title: "Workload has container/s running as root"
+          shortDescription: "Processes in container running as root may be able to escape their container"
+          description: "Processes in container running as root may be able to escape their container and perform malicious actions on the host"
+          handler: "IsRunningAsRoot"
+        - name: "AllowProvilegeEscalation"
+          score: 2
+          shortDescription: "Privilege escalation allows programs inside the container to run as root"
+          description: "Privilege escalation allows programs inside the container to run as root, even if the main process is not root"
+          title: "Workload allows privilege escalation"
+          handler: "IsPrivilegedEscalation"
+        - name: "CapNetRaw"
+          score: 1
+          title: "Workload has container/s with NET_RAW capability"
+          shortDescription: "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet"
+          description: "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death"
+          handler: "IsCapNetRaw"
+        - name: "WritableFileSystem"
+          score: 2
+          title: "Workload has container/s with writable file system"
+          shortDescription: "Writable File System allows the persistence of threats"
+          description: "Writable File System allows threats to persist through restart and upgrades of the container"
+          handler: "IsWritableFileSystem"
+        - name: "UnmaskedProcMount"
+          score: 5
+          title: "Workload expose unsafe parts of /proc"
+          shortDescription: "Full access to /proc can reveal information about the host and other containers\n/proc/sys allows a privileged user to change the kernel parameters are runtime"
+          description: "A container with full access to the host /proc can retrieve information about all activities and users on the host\n/proc/sys allows a privileged user to change the kernel parameters are runtime which may impact how resources are shared amongst containers"
+          handler: "IsUnmaskedProcMount"
+        - name: "AllowedUnsafeSysctls"
+          score: 4
+          title: "Workload allows unsafe sysctls"
+          shortDescription: "Some of the sysctl interfaces allows the container to affect other containers and/or the host"
+          description: "Some of the sysctl interfaces allows the container to grab more CPU resources than allowed by its quota. This may starve other containers from CPU cycles"
+          handler: "IsAllowedUnsafeSysctls"
+      remediation:
+        - name: "seccomp"
+          score: 0.2
+          title: "Workload containers have seccomp policy"
+          shortDescription: ""
+          description: "A seccomp policy specify which system class can be called by the application. It is a sandboxing technique that reduces the chance that a kernel vulnerability will be successfully exploited"
+          handler: "IsSecComp"
+        - name: "selinux"
+          score: 0.4
+          title: "Workload containers SELlinux enabled"
+          shortDescription: ""
+          description: "SELinux (RedHat-based distributions) and AppArmor (Debian-based distributions) provides access control policies. They can be used to restrict how processes can communicate"
+          handler: "IsSelinux"
+        - name: "IngressPolicy"
+          score: 0.6
+          title: "Workload has ingress policy configured"
+          shortDescription: ""
+          description: "A good ingress network policy would prevent external IPs to access a workload accidentally exposed to the host IP"
+          handler: "IsIngressPolicy"
+        - name: "EgressPolicy"
+          score: 0.8
+          title: "Workload has egress policy configured"
+          shortDescription: ""
+          description: "An egress network policy can prevent the workload to be leveraged to perform lateral movement and data ex-filtration"
+          handler: "IsEgressPolicy"
+      aggravation:
+        - name: "ExposedByLoadBalancer"
+          score: 2
+          title: "Workload is exposed through a load balancer"
+          shortDescription: "The service is accessible from other networks and/or from the Internet"
+          description: "The service is accessible from other networks and/or from the Internet"
+          handler: "IsExposedByLoadBalancer"
+        - name: "ExposedByNodePort"
+          score: 2
+          title: "Workload is exposed through a node port"
+          shortDescription: "The service is accessible from other networks and/or from the Internet"
+          description: "The service is accessible from other networks and/or from the Internet"
+          handler: "IsExposedByNodePort"
+        - name: "ExposedByIngress"
+          score: 1.5
+          title: "Workload is exposed through an ingress"
+          shortDescription: "The service is accessible from other networks and/or from the Internet"
+          description: "The service is accessible from other networks and/or from the Internet"
+          handler: "IsExposedByIngress"
+        - name: "HostPort"
+          score: 1.7
+          title: "Workload is exposed through a shared host port"
+          shortDescription: "The service is accessible from other networks and/or from the Internet"
+          description: "The service is accessible from other networks and/or from the Internet"
+          handler: "IsHostPort"
+        - name: "ShareHostNetwork"
+          score: 1.7
+          title: "Workload is exposed through a shared host network"
+          shortDescription: "The service is accessible from other networks and/or from the Internet\nShare Host Network allows containers to sniff traffic from host and other containers"
+          description: "The service is accessible from other networks and/or from the Internet\nShare Host Network allows containers to sniff traffic from host and other containers"
+          handler: "IsShareHostNetwork"
+        - name: "ShareHostPID"
+          score: 1.3
+          title: "Workload is exposed through a shared host PID"
+          shortDescription: "Share Host Pid allow  containers to manipulate other container processes"
+          description: "Each container can manipulate other container processes, inject malicious code, modify /proc, etc. A malicious container can do lateral movements by infecting other containers on the same host"
+          handler: "IsShareHostPID"
+        - name: "ShareHostIPC"
+          score: 1.5
+          title: "Workload is exposed through a shared host IPC"
+          shortDescription: "Shared Host IPC can leak confidential data sent from trusted applications"
+          description: "Communication between trusted application and untrusted applications (malicious third-pay library, rogue container) can leak confidential data"
+          handler: "IsShareHostIPC"
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: octaudit
+  namespace: octaudit
+  labels:
+    app: octaudit
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: octaudit
+  labels:
+    app: octaudit
+rules:
+  - apiGroups:
+      - ''
+      - 'rbac.authorization.k8s.io'
+      - 'extensions'
+      - 'apps'
+      - 'batch'
+      - 'networking.k8s.io'
+    resources: 
+      - '*'
+    verbs:
+      - 'get'
+      - 'list'
+      - 'watch'
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: octaudit
+  labels:
+    app: octaudit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: octaudit
+subjects:
+  - kind: ServiceAccount
+    name: octaudit
+    namespace: octaudit
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: octaudit
+  namespace: octaudit
+  labels:
+    app: octaudit
+spec:
+  template:
+    metadata:
+      labels:
+        app: octaudit
+    spec:
+      containers:
+        - name: octaudit-ui
+          image: octarinesec/octaudit_ui:latest
+          imagePullPolicy: Always
+          env:
+            - name: API_SERVER_PORT
+              value: "80"
+            - name: CONTACT_LINK
+              value: "mailto:info@octarinesec.com?subject=Octarine%20Contact%20Request"
+            - name: WEBSITE_LINK
+              value: "https://www.octarinesec.com"
+        - name: octaudit
+          command:
+            - "/octaudit"
+          env:
+            - name: OCTAUDIT_PORT
+              value: "80"
+            - name: OCTAUDIT_RISK_CONFIG_FILE_PATH
+              value: "/etc/octaudit/risk-config.yaml"
+            - name: OCTAUDIT_REFRESH_STATE_INTERVAL_MINUTES
+              value: "1440"
+          image: octarinesec/octaudit-scanner:latest
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: config
+              mountPath: /etc/octaudit
+      volumes:
+        - name: config
+          configMap:
+            name: octaudit
+            defaultMode: 420
+      serviceAccountName: octaudit
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octaudit-ui
+  namespace: octaudit
+  labels:
+    app: octaudit
+spec:
+  ports:
+    - name: octaudit-ui
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: octaudit
+  type: LoadBalancer

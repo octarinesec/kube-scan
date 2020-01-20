@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="24px" viewBox="0 0 21 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/funnel-hover</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/funnel-hover" stroke="#C5B4D4">
+            <path d="M9,11.5789474 L1,4 L20,4 L12,11.5789474 L12,20 L9,20 L9,11.5789474 Z" id="Combined-Shape" stroke-width="1.2" stroke-linejoin="round"></path>
+            <g id="Group" transform="translate(14.000000, 12.000000)">
+                <path d="M0.5,0.5 L4.5,4.5" id="Line"></path>
+                <path d="M0.5,4.5 L4.5,0.5" id="Line"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: echob-caller-no-issues
+spec:
+  parallelism: 1
+  template:
+    spec:
+      containers:
+      - name: caller2
+        image: octarinesec/echo_server:latest
+      restartPolicy: Never

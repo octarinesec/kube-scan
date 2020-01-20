@@ -1,0 +1,67 @@
+@import 'styleVars.scss';
+
+.workload-name-formatted {
+   font-weight: 400;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+
+   .group {
+      font-weight: 500;
+   }
+   .separator {
+      color: #aaa;
+   }
+   .artifact {
+      color: $purple6;
+      flex: 0 1 auto;
+   }
+   .separator {
+      display: inline-block;
+      padding: 0 2px 0 2px;
+      flex: 0;
+   }
+   .domain {
+      color: $blue2;
+      flex: 0 1 auto;
+   }
+
+   &.faded {
+      .domain,
+      .artifact {
+         color: #777;
+      }
+   }
+
+   .replica-id {
+      font-size: 9px;
+      display: block;
+      padding-top: 4px;
+      word-break: break-word;
+      width: 100%;
+
+      .title,
+      .value {
+         display: inline-block;
+      }
+      .title {
+         color: #666;
+         padding-right: 3px;
+      }
+      .value {
+         font-weight: 500;
+         color: #444;
+      }
+   }
+}
+
+.oc-table-tag-item {
+   padding: 1px 5px;
+   font-size: 9px;
+
+   .sep {
+      font-weight: 900;
+      color: #000;
+      padding: 0 0.4em;
+   }
+}

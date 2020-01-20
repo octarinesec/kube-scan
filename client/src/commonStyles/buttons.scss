@@ -1,0 +1,80 @@
+@import './styleVars.scss';
+
+
+.oc-button {
+   color: #fff;
+   height: 25px;
+   border-radius: 3px;
+   align-items: center;
+   display: flex;
+   padding: 0 18px;
+   overflow: hidden;
+   font-size: 11px;
+   font-weight: 600;
+   cursor: pointer;
+   border-style: solid;
+   border-width: 1px;
+   border-color: transparent;
+   outline: none;
+
+   &.disabled {
+      cursor: default;
+   }
+
+   &.small {
+      font-size: 9px;
+      height: 21px;
+      padding: 0 12px;
+   }
+
+   &.primary {
+      background-color: $buttonPurpleBG;
+      border-color: $buttonPurpleBG;
+
+      &:hover {
+         background-color: $purple1;
+         border-color: $purple1;
+      }
+
+      &.disabled {
+         background-color: $purple3;
+         border-color: $purple3;
+      }
+
+   }
+
+   &.secondary {
+      color: $buttonPurpleBG;
+      border-color: $buttonPurpleBG;
+      border-style: solid;
+      border-width: 1px;
+
+      &:hover {
+         color: $purple1;
+         border-color: $purple1;
+      }
+
+      &.disabled {
+         color: $purple3;
+         border-color: $purple3;
+
+      }
+
+   }
+
+   &.primary.alt {
+      background-color: $buttonBlueBG;
+      border-color: $buttonBlueBG;
+
+      &:hover {
+         background-color: $buttonBlueBGHover;
+         border-color: $buttonBlueBGHover;
+      }
+
+      &.disabled {
+         background-color: $buttonBlueBGDisabled;
+         border-color: $buttonBlueBGDisabled;
+      }
+   }
+
+}

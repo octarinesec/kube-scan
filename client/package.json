@@ -1,0 +1,41 @@
+{
+  "name": "razzle-examples-with-react-router-3",
+  "version": "3.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "razzle start",
+    "build": "razzle build",
+    "test": "razzle test --env=jsdom",
+    "prestart:prod": "razzle build",
+    "start:prod": "NODE_ENV=production node build/server.js"
+  },
+  "dependencies": {
+    "@octarine/ui-common": "github:octarinesec/ui-common",
+    "classnames": "^2.2.6",
+    "express": "^4.16.2",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
+    "prop-types": "^15.6.1",
+    "razzle": "^3.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-resize-detector": "^4.2.1",
+    "react-router": "^3.2.0",
+    "react-router-scroll": "0.4.2",
+    "react-virtualized": "^9.21.1",
+    "serialize-javascript": "latest"
+  },
+  "devDependencies": {
+    "pkg": "^4.3.7",
+    "razzle-plugin-scss": "^3.0.0"
+  },
+  "bin": "build/server.js",
+  "pkg": {
+    "scripts": "build/public/static/js/*.js",
+    "assets": [
+      "build/public/static/media/*.svg",
+      "build/public/static/css/*.css"
+    ]
+  }
+}
