@@ -1,3 +1,4 @@
 /pkg
 /src/pkg
+/src/kube-scan
 .idea
