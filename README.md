@@ -37,6 +37,37 @@ depending on the load-balancer type.
 
 Then set your browser to that address.
 
+##Building from source code
+Build the server image
+```bash
+cd server
+docker build -t SERVER_TAG_NAME .
+docker push SERVER_TAG_NAME
+```
+
+Build the client image
+```bash
+cd ../client
+docker build -t CLIENT_TAG_NAME .
+docker push CLIENT_TAG_NAME
+```
+
+Set kube-scan container image on kube-scan.yaml:
+```bash
+image: SERVER_TAG_NAME
+```
+
+Set kube-scan-ui container image on kube-scan.yaml:
+```bash
+image: CLIENT_TAG_NAME
+```
+
+Apply kube-scan.yaml:
+```bash
+kubectl apply -f kube-scan.yaml
+kubectl port-forward --namespace kube-scan svc/kube-scan-ui 8080:80
+```
+
 # Screenshots
 
 ![Risk score](https://info.octarinesec.com/hubfs/home-1.png)
