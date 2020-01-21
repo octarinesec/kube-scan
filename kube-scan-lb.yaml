@@ -56,9 +56,9 @@ data:
           scope: "Host"
           handler: "IsPrivileged"
         - name: "runningAsRoot"
-          title: "Workload has a container(s) running as root"
+          title: "Workload may have containers running as root"
           shortDescription: "Processes in container running as root may be able to escape their container"
-          description: "Processes inside a container running as root may be able to escape that container and perform malicious actions on the host - basically giving them complete control over the host and the ability to compromise the entire cluster"
+          description: "Workload does not specify a non-root user for its containers to run as and does not specify runAsNonRoot. Processes inside a container running as root may be able to escape that container and perform malicious actions on the host - basically giving them complete control over the host and the ability to compromise the entire cluster"
           confidentiality: "High"
           confidentialityDescription: "Root processes that can escape the container have the ability to read secrets from Kubernetes, Docker and other applications"
           integrity: "Low"
@@ -391,7 +391,7 @@ data:
           exploitability: "None"
           attackVector: "Remote"
           scope: "None"
-          handler: "IsInstrumentedByIstio"   
+          handler: "IsInstrumentedByIstio"
 ---
 apiVersion: v1
 kind: ServiceAccount
