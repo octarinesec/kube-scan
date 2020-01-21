@@ -47,7 +47,7 @@ docker push SERVER_TAG_NAME
 
 Build the client image (from root folder)
 ```bash
-cd ../client
+cd client
 docker build -t CLIENT_TAG_NAME .
 docker push CLIENT_TAG_NAME
 ```
