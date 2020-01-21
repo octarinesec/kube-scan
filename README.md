@@ -38,26 +38,21 @@ depending on the load-balancer type.
 Then set your browser to that address.
 
 ## Building from source code
-Build the server image
+Build the server image (from root folder)
 ```bash
 cd server
 docker build -t SERVER_TAG_NAME .
 docker push SERVER_TAG_NAME
 ```
 
-Build the client image
+Build the client image (from root folder)
 ```bash
 cd ../client
 docker build -t CLIENT_TAG_NAME .
 docker push CLIENT_TAG_NAME
 ```
 
-go to root folder:
-```bash
-cd ../
-```
-
-Set kube-scan container image on kube-scan.yaml:
+Set kube-scan container image on kube-scan.yaml (from root folder)
 ```bash
 image: SERVER_TAG_NAME
 ```
