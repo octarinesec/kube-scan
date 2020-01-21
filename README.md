@@ -52,21 +52,11 @@ docker build -t CLIENT_TAG_NAME .
 docker push CLIENT_TAG_NAME
 ```
 
-Set kube-scan container image on kube-scan.yaml (from root folder)
-```bash
-image: SERVER_TAG_NAME
-```
+Set kube-scan containers images on the desired yaml (from root folder)
+kube-scan container with SERVER_TAG_NAME
+kube-scan-ui container with CLIENT_TAG_NAME
 
-Set kube-scan-ui container image on kube-scan.yaml:
-```bash
-image: CLIENT_TAG_NAME
-```
-
-Apply kube-scan.yaml:
-```bash
-kubectl apply -f kube-scan.yaml
-kubectl port-forward --namespace kube-scan svc/kube-scan-ui 8080:80
-```
+Apply the desired yaml and use "quick start" or "using load-balancer" instructions 
 
 # Screenshots
 
