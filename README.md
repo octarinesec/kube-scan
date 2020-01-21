@@ -52,6 +52,11 @@ docker build -t CLIENT_TAG_NAME .
 docker push CLIENT_TAG_NAME
 ```
 
+go to root folder:
+```bash
+cd ../
+```
+
 Set kube-scan container image on kube-scan.yaml:
 ```bash
 image: SERVER_TAG_NAME
