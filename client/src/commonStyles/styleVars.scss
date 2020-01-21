@@ -1,0 +1,113 @@
+$mainFontFamily: 'Poppins', sans-serif;
+$tableHeaderColor: #333;
+$tableTextColor: #111;
+
+$errorColorBrightBG: #d4173e;
+$errorColor: #F83E64;
+$inputErrorColor: #F83E64;
+$inputBorderDefault: #bbbbbb;
+
+$purple1: #4C3866;
+$purple2: #6C499C;
+$purple3: #A591B6;
+$purple4: #C5B4D4;
+$purple5: #8E6EAF;
+$purple6: #795CA0;
+
+$menuItemColor: $purple6;
+$menuItemSelectedColor: #111;
+$menuSelectedItemBG: #ede9f1;
+$menuSelectedSubItemBG: #ebe8ef;
+$menuSubItemBG: #f7f7f7;
+$menuItemHover: #f6f6f6;
+$menuSubItemHover: #ececec;
+
+$textButtonColor: #1e61e2;
+
+$blue1: #1E4F86;
+$blue2: #4A90E2;
+$blue3: #86AAD3;
+
+$buttonPurpleBG: $purple6;
+$rowPurpleBackground: $purple6;
+$buttonBlueBG: $blue2;
+$buttonBlueBGHover: $blue1;
+$buttonBlueBGDisabled: $blue3;
+$backgroundGrey: #f9f9f9;
+
+$alertColorNone: #A4A4A4;
+$alertColorNormal: #4bc133;
+$alertColorNormalDark: #579839;
+$alertColorLow: #F8C544;
+$alertColorMedium: #F8894D;
+$alertColorMediumDark: #d8673d;
+$alertColorHigh: #F83E64;
+$alertColorHighDark: #d42e40;
+$alertColor: $alertColorHigh;
+
+$txtColorDark1: $purple2;
+$txtColorLight: $purple3;
+
+$createDialogBorder: #56DD3A;
+
+@mixin createDialogBorderMixin() {
+   border-style: dashed;
+   border-color: $createDialogBorder;
+   border-width: 1px;
+   border-radius: 4px;
+}
+
+$secondaryTxtColorLight: $blue2;
+$secondaryTxtColorDark1: $blue1;
+
+$buttonNormalBG: $purple2;
+$buttonNormalColor: #fff;
+$buttonHoverBG: $purple1;
+$buttonHoverColor: #fff;
+$buttonDisabledBG: $purple3;
+$buttonDisabledColor: #fff;
+
+$labelNormalBG: #fff;
+$labelNormalBorder: #bdbdbd;
+$labelHoverBorder: $purple3;
+$labelFocusBorder: $purple1;
+$labelNormalColor: $txtColorDark1;
+$labelActiveBG: $buttonNormalBG;
+$labelActiveColor: $buttonNormalColor;
+
+$secondaryLabelNormalBG: #fff;
+$secondaryLabelNormalBorder: #d3d3d3;
+$secondaryLabelHoverBorder: $blue2;
+$secondaryLabelNormalColor: $secondaryTxtColorLight;
+$secondaryLabelActiveBG: $buttonBlueBG;
+$secondaryLabelActiveColor: $buttonNormalColor;
+
+$tabBorderColor: #E6E6E6;
+
+$checkboxUnselected: #d6d6d6;
+$checkboxUnselectedHover: #C5B4D4;
+$checkboxSelectedBG: $buttonHoverBG;
+$checkboxSelectedHoverBG: $buttonDisabledBG;
+
+$kafkaConsumerColor: #2d7d07;
+$kafkaProducerColor: #b76310;
+$kafkaTopicColor: $purple6;
+
+$controlBackgroundColorDisabled: #f9f9f9;
+$controlBorderColorDisabled: #dddddd;
+$controlColorDisabled: #999999;
+
+$sideMenuWidth: 170px;
+
+$tagItemBackground: #f2f2f2;
+$tagItemColor: #222;
+
+$sectionTitleColor: $purple2;
+$sectionTitleWeight: 500;
+
+$sectionSubTitleColor: #222;
+$sectionSubTitleWeight: 500;
+
+$tableRowBoxShadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+$tableRowBorderRadius: 3px;
+$tableRowBackgroundColor: #fff;

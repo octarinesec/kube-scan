@@ -1,0 +1,82 @@
+.K8sRisksTable {
+
+  &.oc-main-page {
+    flex-basis: 0;
+    overflow-y: auto;
+    height: auto;
+
+    .CommonTable {
+      flex: 1 1;
+    }
+
+    .header-wrapper {
+      width: 100%;
+      overflow-x: hidden;
+      box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .oc-table-header {
+      height: 35px;
+      vertical-align: text-bottom;
+
+      .oc-table-cell {
+        padding-top: 20px;
+        color: gray;
+      }
+    }
+
+    .oc-table-row, .oc-table-row-inner {
+      width: 100%;
+    }
+
+    .oc-table-row:not(.oc-table-header) .oc-table-row-inner {
+      background-color: transparent;
+      padding-bottom: 5px;
+      padding-top: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .oc-table-cell {
+      &.risk {
+        width: 10%;
+        text-align: center;
+
+        div {
+          width: 50%;
+          margin: auto;
+          padding: 5px;
+          text-align: center;
+          color: white;
+          font-weight: bold;
+          border-radius: 5px;
+        }
+
+        &.high div {
+          background-color: #f83e63;
+        }
+        &.medium div {
+          background-color: #faba2f;
+        }
+        &.low div {
+          background-color: #b2b2b2;
+        }
+
+      }
+      &.resourceName {
+        width: 32%;
+      }
+      &.resourceKind {
+        width: 32%;
+      }
+      &.resourceNamespace {
+        width: 36%;
+      }
+      &.resourceDomain {
+        width: 25%;
+      }
+    }
+  }
+}

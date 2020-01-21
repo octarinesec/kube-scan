@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/file-press</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/file-press" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M9.5,11.5 L14.5,11.5" id="Line-6" stroke="#795CA0" stroke-linecap="square"></path>
+        <path d="M9.5,14.5 L16.5,14.5" id="Line" stroke="#795CA0" stroke-linecap="square"></path>
+        <path d="M9.5,17.25 L16.5,17.25" id="Line-Copy" stroke="#795CA0" stroke-linecap="square"></path>
+        <polygon id="Path-4" stroke="#795CA0" points="15.7470123 4 19.5737958 7.82678344 19.5737958 21.9358388 7 21.9358388 7 4"></polygon>
+        <polyline id="Path-5" stroke="#795CA0" points="19.5718455 7.39771838 16 7.39771838 16 4"></polyline>
+    </g>
+</svg>

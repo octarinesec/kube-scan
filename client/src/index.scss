@@ -1,0 +1,158 @@
+@import 'commonStyles/styleVars.scss';
+@import 'commonStyles/dropdown.scss';
+@import 'commonStyles/icons.scss';
+@import 'commonStyles/buttons.scss';
+@import 'commonStyles/workloads.scss';
+@import 'commonStyles/tabs.scss';
+@import 'commonStyles/input.scss';
+@import 'commonStyles/tables.scss';
+@import 'commonStyles/infoItems.scss';
+
+
+
+html, #root {
+   height: 100%;
+   overflow: hidden;
+
+}
+
+#root {
+   display: flex;
+   flex-direction: column;
+
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: $mainFontFamily;
+   height: 100%;
+   overflow: hidden;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+   font-family: $mainFontFamily;
+}
+
+/** Common styles */
+
+.button {
+   border-radius: 3px;
+   height: 31px;
+   line-height: 31px;
+   text-align: center;
+   padding: 0 15px;
+   font-size: 10px;
+   font-weight: 500;
+
+   background-color: $buttonNormalBG;
+   color: white;
+
+   transition-timing-function: ease;
+   transition-duration: .2s;
+   transition-property: color, background-color;
+   user-select: none;
+
+
+   &:active {
+      color: #46BF57;
+      background-color: $buttonHoverColor;
+   }
+   &.disabled {
+      background-color: darkgray;
+      pointer-events: none;
+   }
+
+   &:hover {
+      cursor: pointer;
+   }
+}
+
+.clickable,
+.unselectable {
+   user-select: none;
+}
+
+.clickable:hover {
+   cursor: pointer;
+}
+
+.hover-tooltip {
+   position: absolute;
+   bottom: calc(100% + 5px);
+   right: -10px;
+   z-index: 4;
+   white-space: nowrap;
+
+   color: #fff;
+   background-color: #39424C;
+   font-size: 11px;
+   border-radius: 4px;
+   padding: 3px 8px;
+
+   &:after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 13px;
+      height: 0;
+      width: 0;
+      border-style: solid;
+      border-color: #39424C transparent transparent transparent;
+      border-width: 5px 5px 0 5px;
+   }
+
+   &.bottom {
+      bottom: auto;
+      top: calc(100% + 5px);
+
+      &:after {
+         content: '';
+         position: absolute;
+         bottom: 100%;
+         top: auto;
+         right: 13px;
+         height: 0;
+         width: 0;
+         border-style: solid;
+         border-color: transparent transparent #39424C transparent;
+         border-width: 0 5px 5px 5px;
+      }
+   }
+}
+
+.oc-main-page {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   background-color: $backgroundGrey;
+
+   .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+   }
+}
+
+
+input {
+   border: none;
+   outline: none;
+   color: #2F1A45;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+   color: #DBDBDB;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+   color: #DBDBDB;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+   color: #DBDBDB;
+}
+input:-moz-placeholder { /* Firefox 18- */
+   color: #DBDBDB;
+}

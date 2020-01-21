@@ -1,0 +1,44 @@
+@import 'commonStyles/styleVars.scss';
+
+
+@mixin side-menu-on-rule() {
+   .side-menu-on {
+      @content;
+   }
+}
+
+
+@mixin side-menu-off-rule() {
+   .side-menu-off {
+      @content;
+   }
+}
+
+
+@mixin side-menu-media-min-width($width) {
+   @include side-menu-off-rule() {
+      @media screen and (min-width: $width) {
+         @content;
+      }
+   }
+   @include side-menu-on-rule() {
+      @media screen and (min-width: $width + $sideMenuWidth) {
+         @content;
+      }
+   }
+}
+
+
+@mixin side-menu-media-max-width($width) {
+   @include side-menu-off-rule() {
+      @media screen and (max-width: $width) {
+         @content;
+      }
+   }
+   @include side-menu-on-rule() {
+      @media screen and (max-width: $width + $sideMenuWidth) {
+         @content;
+      }
+   }
+}
+

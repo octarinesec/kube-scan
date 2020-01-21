@@ -37,6 +37,27 @@ depending on the load-balancer type.
 
 Then set your browser to that address.
 
+## Building from source code
+Build the server image (from root folder)
+```bash
+cd server
+docker build -t SERVER_TAG_NAME .
+docker push SERVER_TAG_NAME
+```
+
+Build the client image (from root folder)
+```bash
+cd client
+docker build -t CLIENT_TAG_NAME .
+docker push CLIENT_TAG_NAME
+```
+
+Set kube-scan containers images on the desired yaml (from root folder)
+kube-scan container with SERVER_TAG_NAME
+kube-scan-ui container with CLIENT_TAG_NAME
+
+Apply the desired yaml and use "quick start" or "using load-balancer" instructions 
+
 # Screenshots
 
 ![Risk score](https://info.octarinesec.com/hubfs/home-1.png)

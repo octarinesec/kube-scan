@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/search-hover</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="icon/search-hover" stroke="#C5B4D4">
+            <g id="Group-6" transform="translate(0.000000, 1.000000)">
+                <path d="M13.6,13.6 L22.2666667,22.2666667" id="Stroke-5"></path>
+                <path d="M16.3333333,8.53333333 C16.3333333,12.8399643 12.8413159,16.3333333 8.53246251,16.3333333 C4.22535075,16.3333333 0.733333333,12.8399643 0.733333333,8.53333333 C0.733333333,4.22496093 4.22535075,0.733333333 8.53246251,0.733333333 C12.8413159,0.733333333 16.3333333,4.22496093 16.3333333,8.53333333" id="Fill-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

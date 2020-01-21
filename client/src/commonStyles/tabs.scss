@@ -1,0 +1,42 @@
+@import './styleVars.scss';
+
+.oc-tab-bar {
+   border:  solid $tabBorderColor;
+   border-width:  0 0 1px 0;
+   text-align: center;
+}
+
+.oc-tab {
+   display: inline-block;
+   border:  solid $tabBorderColor;
+   border-width: 1px 1px 0 1px;
+   border-radius: 4px 4px 0 0;
+   background-color: #ffffff;
+   font-size: 11px;
+   font-weight: 600;
+   color: #6C6C6C;
+   padding: 4px 20px 3px 20px;
+   margin: 0 4px;
+   text-decoration: none;
+   text-align: center;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #4C3866;
+      color: #fff;
+   }
+
+   &.selected {
+      color: #fff;
+      background-color: $buttonPurpleBG;
+
+      &.domains {
+         background-color: $buttonBlueBG;
+      }
+   }
+
+   &.disabled {
+      cursor: default;
+      color: #969696;
+   }
+}

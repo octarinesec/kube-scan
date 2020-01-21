@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo
+  template:
+    metadata:
+      labels:
+        app: echo
+    spec:
+      containers:
+      - name: echo-a
+        image: octarinesec/echo_server:latest
+        ports:
+        - containerPort: 5000
+          name: httpport
+        - containerPort: 5555
+          name: tcpport
+        securityContext:
+          privileged: true

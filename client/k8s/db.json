@@ -1,0 +1,1134 @@
+{
+  "risks":  {
+    "data": [
+      {
+        "kind": "Pod",
+        "name": "tests-runner",
+        "namespace": "octarine-tests",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "user-db",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "carts-db",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "catalogue",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "catalogue-db",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 4,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            },
+            {
+              "name": "HostPort",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a shared host port",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 1.7
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "front-end",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 4,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "ExposedByNodePort",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a node port",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 2
+            },
+            {
+              "name": "ShareHostPID",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a shared host PID",
+              "shortDescription": "Share Host Pid allow  containers to manipulate other container processes",
+              "description": "Each container can manipulate other container processes, inject malicious code, modify /proc, etc. A malicious container can do lateral movements by infecting other containers on the same host",
+              "score": 1.3
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "orders-db",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "payment",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "queue-master",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "carts",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "orders",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "rabbitmq",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "shipping",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "user",
+        "namespace": "sock-shop",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "adservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 4,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            },
+            {
+              "name": "HostPort",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a shared host port",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 1.7
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "cartservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "checkoutservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "emailservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "frontend",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 4,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            },
+            {
+              "name": "ExposedByLoadBalancer",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a load balancer",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "paymentservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "productcatalogservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "currencyservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "dep-test",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 5,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "runningAsRoot",
+              "type": "Basic",
+              "title": "Workload has container/s running as root",
+              "shortDescription": "Processes in container running as root may be able to escape their container",
+              "description": "Processes in container running as root may be able to escape their container and perform malicious actions on the host",
+              "score": 4
+            },
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            },
+            {
+              "name": "IngressPolicy",
+              "type": "Remediation",
+              "title": "Workload has ingress policy configured",
+              "shortDescription": "",
+              "description": "A good ingress network policy would prevent external IPs to access a workload accidentally exposed to the host IP",
+              "score": 0.6
+            },
+            {
+              "name": "EgressPolicy",
+              "type": "Remediation",
+              "title": "Workload has egress policy configured",
+              "shortDescription": "",
+              "description": "An egress network policy can prevent the workload to be leveraged to perform lateral movement and data ex-filtration",
+              "score": 0.8
+            },
+            {
+              "name": "ExposedByLoadBalancer",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a load balancer",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 2
+            },
+            {
+              "name": "ExposedByIngress",
+              "type": "Aggravation",
+              "title": "Workload is exposed through an ingress",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 1.5
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "loadgenerator",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "recommendationservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "redis-cart",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Deployment",
+        "name": "shippingservice",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "DaemonSet",
+        "name": "echo-daemon",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "CronJob",
+        "name": "jobaaa",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Job",
+        "name": "echob-caller-no-issues",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 2,
+          "riskCategory": "Low",
+          "riskItems": [
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Job",
+        "name": "echob-caller20",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 10,
+          "riskCategory": "High",
+          "riskItems": [
+            {
+              "name": "privileged",
+              "type": "Basic",
+              "title": "Workload is privileged",
+              "shortDescription": "Processes inside a privileged containers get full access to the host",
+              "description": "Processes inside a privileged containers get full access to the host. A malicious, or library, can compromise the host and the entire cluster",
+              "score": 6
+            },
+            {
+              "name": "runningAsRoot",
+              "type": "Basic",
+              "title": "Workload has container/s running as root",
+              "shortDescription": "Processes in container running as root may be able to escape their container",
+              "description": "Processes in container running as root may be able to escape their container and perform malicious actions on the host",
+              "score": 4
+            },
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            },
+            {
+              "name": "HostPort",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a shared host port",
+              "shortDescription": "The service is accessible from other networks and/or from the Internet",
+              "description": "The service is accessible from other networks and/or from the Internet",
+              "score": 1.7
+            },
+            {
+              "name": "ShareHostPID",
+              "type": "Aggravation",
+              "title": "Workload is exposed through a shared host PID",
+              "shortDescription": "Share Host Pid allow  containers to manipulate other container processes",
+              "description": "Each container can manipulate other container processes, inject malicious code, modify /proc, etc. A malicious container can do lateral movements by infecting other containers on the same host",
+              "score": 1.3
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      },
+      {
+        "kind": "Pod",
+        "name": "echob-caller20-lzmct",
+        "namespace": "default",
+        "domain": "",
+        "risk": {
+          "riskScore": 6,
+          "riskCategory": "Medium",
+          "riskItems": [
+            {
+              "name": "privileged",
+              "type": "Basic",
+              "title": "Workload is privileged",
+              "shortDescription": "Processes inside a privileged containers get full access to the host",
+              "description": "Processes inside a privileged containers get full access to the host. A malicious, or library, can compromise the host and the entire cluster",
+              "score": 6
+            },
+            {
+              "name": "runningAsRoot",
+              "type": "Basic",
+              "title": "Workload has container/s running as root",
+              "shortDescription": "Processes in container running as root may be able to escape their container",
+              "description": "Processes in container running as root may be able to escape their container and perform malicious actions on the host",
+              "score": 4
+            },
+            {
+              "name": "AllowProvilegeEscalation",
+              "type": "Basic",
+              "title": "Workload allows privilege escalation",
+              "shortDescription": "Privilege escalation allows programs inside the container to run as root",
+              "description": "Privilege escalation allows programs inside the container to run as root, even if the main process is not root",
+              "score": 2
+            },
+            {
+              "name": "CapNetRaw",
+              "type": "Basic",
+              "title": "Workload has container/s with NET_RAW capability",
+              "shortDescription": "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet",
+              "description": "NET_RAW capability enables ARP spoofing from the container, UDP packets with forged source , IP, etc. Such capability enables the container to perform Man-in-the-Middle (MitM) attacks on the host network\nNET_RAW capability enables the container to craft malicious raw packets such as Ping of Death",
+              "score": 1
+            },
+            {
+              "name": "WritableFileSystem",
+              "type": "Basic",
+              "title": "Workload has container/s with writable file system",
+              "shortDescription": "Writable File System allows the persistence of threats",
+              "description": "Writable File System allows threats to persist through restart and upgrades of the container",
+              "score": 2
+            }
+          ],
+          "riskStatus": "Open"
+        }
+      }
+    ]
+  }
+}

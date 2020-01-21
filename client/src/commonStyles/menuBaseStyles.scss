@@ -1,0 +1,177 @@
+@import 'commonStyles/menuStyleVars.scss';
+
+%menu-content {
+   display: flex;
+   flex-direction: column;
+   background-color: #fff;
+   border-width: 1px;
+   border-color: $menuBorderPlain;
+   border-style: solid;
+   border-radius: $menuContentBorderRadius;
+
+   &.artifact-content {
+      border-color: $menuBorderPrimary;
+
+      .menu-header {
+         .text-button {
+            color: $menuItemColorPrimary;
+         }
+      }
+   }
+
+   &.domain-content {
+      border-color: $menuBorderSecondary;
+
+      .menu-header {
+         .text-button {
+            color: $menuItemColorSecondary;
+         }
+      }
+   }
+
+}
+
+%menu-header {
+   display: flex;
+   flex-direction: row;
+   flex: 0 0 auto;
+
+   .search-wrapper {
+      min-width: 60px;
+      display: flex;
+      flex: 1 1;
+      flex-direction: row;
+      flex-basis: 80px;
+      padding: 4px 0 4px 8px;
+      box-sizing: border-box;
+
+      input {
+         width: 100%;
+      }
+   }
+
+   .text-button {
+      background-color: transparent;
+      display: block;
+      color: $menuItemColorPlain;
+      flex: 0 0 auto;
+      padding: 0 8px 0 0;
+      box-sizing: border-box;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 500;
+      font-family: $mainFontFamily;
+   }
+}
+
+%menu-item {
+   color: $menuItemColorPlain;
+   font-size: $menuItemTextSize;
+   min-height: $menuItemHeight;
+   box-sizing: border-box;
+   text-align: center;
+   padding-left: 8px;
+   display: flex;
+   flex: 0 0 auto;
+   flex-direction: row;
+   align-items: center;
+   font-family: $mainFontFamily;
+   font-weight: 600;
+   cursor: pointer;
+   border-width: 0 0 1px 0;
+   border-style: solid;
+   border-color: $menuItemBorderColor;
+
+   &:hover {
+      background-color: $menuItemHoverColor;
+   }
+
+   &:last-child {
+      border-width: 0 0 0 0;
+   }
+
+   .Checkbox {
+      color: inherit;
+      flex: 1 1;
+      text-align: left;
+      padding-left: 0;
+      flex-direction: row;
+      flex-basis: 1px;
+      white-space: normal;
+      word-break: break-word;
+      display: flex;
+   }
+}
+
+%menu-opener {
+   height:$menuOpenerHeight;
+   background-color: #fff;
+   color: $menuItemColorPlain;
+   border-width: 1px;
+   border-style: solid;
+   border-color: $menuBorderPlain;
+   border-radius: $menuOpenerBorderRadius;
+   font-weight: 600;
+   padding: 0 10px 0 12px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   position: relative;
+   font-size: $menuOpenerTextSize;
+   font-family: $mainFontFamily;
+
+   &.artifact-opener {
+      color: $menuItemColorPrimary;
+      border-color: $menuBorderPrimary;
+   }
+
+   &.domain-opener {
+      color: $menuItemColorSecondary;
+      border-color: $menuItemColorSecondary;
+   }
+
+
+   .caption {
+      flex: 1 1;
+      text-align: center;
+   }
+
+   &.show-arrow {
+      padding-right: 6px;
+
+      &:after {
+         content: '';
+         margin-top: 1px;
+         width: 13px;
+         height: 7px;
+         background-size: cover;
+         background-position: center;
+         background-image: url('~img/common/dropdown_arrow_collapsed.svg');
+         display: block;
+         margin-left: 6px;
+         flex: 0 0 auto;
+      }
+
+      &.open {
+         &:after {
+            background-image: url('~img/common/dropdown_arrow_collapsed.svg');
+            transform: rotateZ(180deg);
+         }
+         &:hover:after {
+            background-image: url('~img/common/dropdown_arrow_collapsed.svg');
+            transform: rotateZ(180deg);
+         }
+      }
+
+      &:hover {
+         &:after {
+            background-image: url('~img/common/dropdown_arrow_hover.svg');
+         }
+      }
+   }
+
+}

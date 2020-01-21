@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/map-normal</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/map-normal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M21,7 C21,8.65639652 19.6569164,10 17.9996651,10 C16.3430836,10 15,8.65639652 15,7 C15,5.34293369 16.3430836,4 17.9996651,4 C19.6569164,4 21,5.34293369 21,7" id="Fill-1-Copy" stroke="#D6D6D6"></path>
+        <path d="M21,18 C21,19.6563965 19.6569164,21 17.9996651,21 C16.3430836,21 15,19.6563965 15,18 C15,16.3429337 16.3430836,15 17.9996651,15 C19.6569164,15 21,16.3429337 21,18" id="Fill-1-Copy-3" stroke="#D6D6D6"></path>
+        <path d="M9,13 C9,14.6563965 7.65691638,16 5.99966507,16 C4.34308362,16 3,14.6563965 3,13 C3,11.3429337 4.34308362,10 5.99966507,10 C7.65691638,10 9,11.3429337 9,13" id="Fill-1-Copy-3" stroke="#D6D6D6"></path>
+        <path d="M8.5,11.5 L15.5,8.5" id="Line-4" stroke="#D6D6D6" stroke-linecap="square"></path>
+        <path d="M9.5,14.5 L15.5,17.5" id="Line" stroke="#D6D6D6" stroke-linecap="square"></path>
+    </g>
+</svg>

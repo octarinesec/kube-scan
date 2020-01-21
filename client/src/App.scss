@@ -1,0 +1,27 @@
+.OCApp {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  ::selection {
+    background-color : rgba(255, 216, 67, 0.5);
+  }
+
+
+  .app-main-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    .SideMenu {
+      flex: 0 0 auto;
+    }
+
+    .current-page-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1;
+      overflow: hidden;
+    }
+  }
+}

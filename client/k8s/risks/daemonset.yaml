@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: echo-daemon
+spec:
+  selector:
+    matchLabels:
+      app: echo-daemon
+  template:
+    metadata:
+      labels:
+        app: echo-daemon
+    spec:
+      containers:
+      - name: echo-a
+        image: octarinesec/echo_server:latest
+        securityContext:
+          capabilities:
+            add: ["all"]
+            drop: ["sys_admin"]
+          readOnlyRootFilesystem: true
+          procMount: "Unmasked"
+          privileged: false
+        ports:
+        - containerPort: 5000
+          name: httpport
+        - containerPort: 5557
+          name: tcpport

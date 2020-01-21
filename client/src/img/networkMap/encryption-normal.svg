@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/encryption-normal</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/encryption-normal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7.45189576,10.557058 C7.45189576,2.21917826 17.5763205,2.21917826 17.5763205,10.557058" id="Path-5" stroke="#C9C9C9"></path>
+        <path d="M12.4276928,13.8719381 C12.4276928,15.3565726 12.4276928,16.4126894 12.4276928,17.0402885" id="Path-6" stroke="#C9C9C9"></path>
+        <rect id="Rectangle-2" stroke="#C9C9C9" x="7.5" y="10.5" width="10" height="10"></rect>
+    </g>
+</svg>

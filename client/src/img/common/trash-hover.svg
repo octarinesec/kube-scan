@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="23px" height="24px" viewBox="0 0 23 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/trash-hover</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/trash-hover" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M17.8807377,6 C17.8807377,10.6519115 17.8807377,17.2236616 17.8807377,18.8335095 C17.8807377,20.4433574 17.3971422,20.7593759 15.8723607,20.7593759 C14.8558397,20.7593759 13.2119653,20.7593759 10.9407376,20.7593759 L12.9407376,20.7593759 C10.6692686,20.7593759 9.02521954,20.7593759 8.0085905,20.7593759 C6.48364694,20.7593759 6,20.4433574 6,18.8335095 C6,17.2236616 6,10.6519115 6,6" id="Path-4" stroke="#C5B4D4"></path>
+        <path d="M16.651269,5.5770148 C16.651269,4.50634795 16.5051873,4 15.5127556,4 C14.8511344,4 13.3468826,4 11,4 L12.651269,4 C10.3043864,4 8.80013452,4 8.13851337,4 C7.14608164,4 7,4.50634795 7,5.5770148" id="Path-6" stroke="#C5B4D4" transform="translate(11.825634, 4.788507) scale(-1, 1) translate(-11.825634, -4.788507) "></path>
+        <g id="Group" transform="translate(8.000000, 8.000000)" stroke="#C5B4D4">
+            <path d="M7,0 L7,9.38553139" id="Path-7"></path>
+            <path d="M4,0 L4,9.38553139" id="Path-7"></path>
+            <path d="M1,0 L1,9.38553139" id="Path-7"></path>
+        </g>
+        <path d="M4,6 C9.33333333,6.01620279 14.6666667,6.03240559 20,6.04860838" id="Path" stroke="#C5B4D4" fill="#D8D8D8"></path>
+    </g>
+</svg>

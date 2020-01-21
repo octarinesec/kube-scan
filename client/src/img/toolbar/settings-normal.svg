@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/settings</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/settings" stroke="#D6D6D6">
+            <g id="Group">
+                <path d="M0,13 L26,13" id="Line-5"></path>
+                <path d="M13,26 L13,3.55271368e-15" id="Line-5"></path>
+                <path d="M3.80761184,22.1923882 L22.1923882,3.80761184" id="Line-5"></path>
+                <path d="M22.3388348,22.5459415 L3.95405845,4.16116524" id="Line-5"></path>
+                <circle id="Oval-3" fill="#FFFFFF" cx="13" cy="13" r="8"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

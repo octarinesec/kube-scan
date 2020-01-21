@@ -1,0 +1,213 @@
+@import './styleVars.scss';
+
+
+.dropdown-content-wrapper {
+   font-size: 11px;
+   font-weight: 600;
+   background-color: #fff;
+   border: solid 1px $purple3;
+   border-radius: 0 0 4px 4px;
+   position: relative;
+   top: -3px;
+   padding-top: 3px;
+   z-index: 1;
+
+   &.secondary {
+      border-color: $secondaryLabelHoverBorder;
+   }
+}
+
+.dropdown-content-item {
+   padding: 4px 10px;
+   border-width: 0 0 1px 0;
+   border-style: solid;
+   border-color: #f2f2f2;
+   color: $txtColorLight;
+   cursor: pointer;
+   outline: none;
+
+   &:last-child {
+      border-bottom: none;
+      border-radius: 0 0 4px 4px;
+   }
+   &:hover {
+      background-color: #f2f2f2;
+      color: $txtColorDark1;
+   }
+
+   &:focus {
+      background-color: #f2f2f2;
+      color: $txtColorDark1;
+   }
+
+
+   &.secondary {
+      color: $secondaryTxtColorLight;
+
+      &:hover {
+         color: $secondaryTxtColorDark1;
+      }
+   }
+}
+
+.opener:focus > .dropdown-menu-opener {
+   border-color: $labelFocusBorder;
+
+
+   &.secondary {
+      border-color: $secondaryLabelHoverBorder;
+   }
+
+   &.disabled {
+      color: $controlColorDisabled;
+      background-color: $controlBackgroundColorDisabled;
+      border-color: $controlBorderColorDisabled;
+   }
+}
+
+.dropdown-menu-opener {
+   border-radius: 3px;
+   border: 1px solid $labelNormalBorder;
+   background-color: $labelNormalBG;
+   color: $labelNormalColor;
+   cursor: pointer;
+   align-items: center;
+   display: flex;
+   height: 24px;
+   justify-content: center;
+   position: relative;
+   z-index: 3;
+   transition-duration: .2s;
+   transition-timing-function: ease;
+   transition-property: background-color, color;
+   font-size: 11px;
+   font-weight: 600;
+   overflow: hidden;
+   padding: 0 6px;
+
+   .edit-input,
+   .search-input {
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0;
+      padding: 0 10px;
+      font-weight: 500;
+      z-index: 2;
+   }
+
+   &:focus,
+   &:hover {
+      border-color: $labelHoverBorder;
+   }
+   &.editing {
+      border-color: $labelActiveBG;
+   }
+   &.has-selection {
+      border-color: $labelActiveBG;
+      color: $purple1;
+      background-color: #f4f1f7;
+   }
+   &.active,
+   &:active {
+      background-color: $labelActiveBG;
+      color: $labelActiveColor;
+      border-color: $labelActiveBG;
+   }
+
+   &.show-arrow {
+      &.open {
+         &:after {
+            background-image: url('./img/common/dropdown_arrow_collapsed.svg');
+            transform: rotateZ(180deg);
+         }
+         &:hover:after {
+            background-image: url('./img/common/dropdown_arrow_collapsed.svg');
+            transform: rotateZ(180deg);
+         }
+      }
+
+      &:after {
+         content: '';
+         margin-top: 1px;
+         width: 13px;
+         height: 7px;
+         background-size: cover;
+         background-position: center;
+         background-image: url('./img/common/dropdown_arrow_collapsed.svg');
+         display: block;
+         flex: 0 0 auto;
+      }
+
+      &:hover {
+         &:after {
+            background-image: url('./img/common/dropdown_arrow_hover.svg');
+         }
+      }
+   }
+
+   &.secondary {
+      border-color: $secondaryLabelNormalBorder;
+      color: $secondaryLabelNormalColor;
+
+      &:focus,
+      &:hover {
+         border-color: $secondaryLabelHoverBorder;
+      }
+      &.active,
+      &:active {
+         background-color: $secondaryLabelActiveBG;
+         color: $secondaryLabelActiveColor;
+         border-color: $secondaryLabelActiveBG;
+      }
+      &.editing {
+         border-color: $secondaryLabelActiveBG;
+      }
+      &.has-selection {
+         border-color: $secondaryLabelActiveBG;
+         color: $secondaryLabelActiveBG;
+         background-color: #f0f5fc;
+      }
+   }
+
+   &.simple {
+      background-color: #f3f3f3;
+      color: #555;
+
+   }
+
+   &.disabled {
+      color: $controlColorDisabled;
+      background-color: $controlBackgroundColorDisabled;
+      border-color: $controlBorderColorDisabled;
+
+      &.show-arrow {
+         &:after {
+            background-image: url('./img/common/dropdown_arrow_collapsed.svg');
+         }
+      }
+
+      &:focus,
+      &:hover,
+      &:active,
+      &.active {
+         color: $controlColorDisabled;
+         background-color: $controlBackgroundColorDisabled;
+         border-color: $controlBorderColorDisabled;
+
+         &.show-arrow {
+            &:after {
+               background-image: url('./img/common/dropdown_arrow_collapsed.svg');
+            }
+         }
+      }
+   }
+
+   .text {
+      padding: 0 4px;
+      flex: 1;
+      text-align: center;
+   }
+}

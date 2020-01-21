@@ -1,0 +1,156 @@
+@import './styleVars.scss';
+
+
+.oc-icon {
+   background-size: auto;
+   background-position: center;
+   background-repeat: no-repeat;
+   cursor: pointer;
+
+   &.edit-icon {
+      background-image: url('./img/common/edit-normal.svg');
+      height: 24px;
+      width: 24px;
+
+      &:hover {
+         background-image: url('./img/common/edit-hover.svg');
+      }
+      &:active {
+         background-image: url('./img/common/edit-press.svg');
+      }
+      &.negative {
+         background-image: url('./img/common/edit-negative-normal.svg');
+      }
+      &.negative:hover {
+         background-image: url('./img/common/edit-negative-hover.svg');
+      }
+      &.negative:active {
+         background-image: url('./img/common/edit-negative-press.svg');
+      }
+   }
+
+   &.duplicate-icon {
+      height: 24px;
+      width: 24px;
+
+      &.negative {
+         background-image: url('./img/common/duplicate-negative.svg');
+      }
+      &.negative:hover {
+         background-image: url('./img/common/duplicate-negative-hover.svg');
+      }
+      &.negative:active {
+         background-image: url('./img/common/duplicate-negative.svg');
+      }
+   }
+
+   &.trash-icon {
+      background-image: url('./img/common/trash-normal.svg');
+      height: 24px;
+      width: 24px;
+
+      &:hover {
+         background-image: url('./img/common/trash-hover.svg');
+      }
+      &:active {
+         background-image: url('./img/common/trash-press.svg');
+      }
+      &.negative {
+         background-image: url('./img/common/trash-negative-normal.svg');
+      }
+      &.negative:hover {
+         background-image: url('./img/common/trash-negative-hover.svg');
+      }
+      &.negative:active {
+         background-image: url('./img/common/trash-negative-press.svg');
+      }
+   }
+
+   &.close-icon {
+      background-image: url('./img/common/delete-normal.svg');
+      height: 24px;
+      width: 24px;
+
+      &:hover {
+         background-image: url('./img/common/delete-hover.svg');
+      }
+      &:active {
+         background-image: url('./img/common/delete-press.svg');
+      }
+   }
+
+   &.search-icon {
+      background-image: url('./img/common/search-normal.svg');
+      height: 24px;
+      width: 24px;
+
+      &:hover {
+         background-image: url('./img/common/search-hover.svg');
+      }
+      &:active {
+         background-image: url('./img/common/search-press.svg');
+      }
+   }
+
+
+   &.add-icon {
+      background-image: url('./img/common/plus-normal.svg');
+      height: 12px;
+      width: 12px;
+
+      &:hover {
+         background-image: url('./img/common/plus-hover.svg');
+      }
+      &:active {
+         background-image: url('./img/common/plus-press.svg');
+      }
+
+      &.negative {
+         background-image: url('./img/common/plus-negative-normal.svg');
+
+         &:hover {
+            background-image: url('./img/common/plus-negative-hover.svg');
+         }
+         &:active {
+            background-image: url('./img/common/plus-negative-active.svg');
+         }
+      }
+   }
+
+   &.checkbox-circle {
+      $checkboxSize: 14px;
+      border-radius: 50%;
+      border: none;
+      background-color: $checkboxUnselected;
+      display: inline-block;
+      text-align: center;
+      float: none;
+      height: $checkboxSize;
+      width: $checkboxSize;
+      position: relative;
+
+      &:hover {
+         background-color: $checkboxUnselectedHover;
+      }
+
+      &:before {
+         content: '';
+         background-image: url('./img/common/checkboxMarkWhite.svg');
+         height: 6px;
+         width: 9px;
+         background-size: cover;
+         background-position: center;
+         position: absolute;
+         top: calc(50% - 3px);
+         left: calc(50% - 5px);
+      }
+
+      &.selected {
+         background-color: $checkboxSelectedBG;
+
+         &:hover {
+            background-color: $checkboxSelectedHoverBG;
+         }
+      }
+   }
+}
