@@ -37,7 +37,7 @@ depending on the load-balancer type.
 
 Then set your browser to that address.
 
-##Building from source code
+## Building from source code
 Build the server image
 ```bash
 cd server
