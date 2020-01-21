@@ -467,9 +467,7 @@ spec:
             - name: WEBSITE_LINK
               value: "https://www.octarinesec.com"
         - name: kube-scan
-          command:
-            - "/kubescan"
-            - "-logtostderr=true"
+          image: octarinesec/kubescan-scanner:tov
           env:
             - name: KUBESCAN_PORT
               value: "80"
@@ -477,7 +475,6 @@ spec:
               value: "/etc/kubescan/risk-config.yaml"
             - name: KUBESCAN_REFRESH_STATE_INTERVAL_MINUTES
               value: "1440"
-          image: octarinesec/kubescan-scanner:19.3
           imagePullPolicy: Always
           volumeMounts:
             - name: config
