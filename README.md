@@ -60,6 +60,16 @@ kube-scan-ui container with CLIENT_TAG_NAME
 
 Apply the desired yaml and use "quick start" or "using load-balancer" instructions 
 
+## Uninstall kube-scan
+```bash
+kubectl delete -f kube-scan.yaml
+```
+
+In case of using a load-balancer:
+```bash
+kubectl delete -f kube-scan-lb.yaml
+```
+
 # Screenshots
 
 ![Risk score](https://info.octarinesec.com/hubfs/home-1.png)
