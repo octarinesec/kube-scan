@@ -4,13 +4,13 @@
 </p>
 
 # Kube-Scan
-Try our free Kubernetes risk assessment tool today.
-Run it on any cluster at any time. No data leaves your cluster. We do not collect any information.
+Try our free Kubernetes risk assessment tool today.  
+Run it on any cluster at any time. No data leaves your cluster. We do not collect any information.  
 For more information on Octarine see https://www.octarinesec.com. 
 
 # Get the risk score of your workloads
 
-kube-scan gives a risk score, from 0 (no risk) to 10 (high risk) for each workload. The risk is based on the runtime configuration of each workload (currently 20+ settings). The exact rules and scoring formula are part of the open-source framework [KCCSS](https://github.com/octarinesec/kccss), the Kubernetes Common Configuration Scoring System. 
+Kube-Scan gives a risk score, from 0 (no risk) to 10 (high risk) for each workload. The risk is based on the runtime configuration of each workload (currently 20+ settings). The exact rules and scoring formula are part of the open-source framework [KCCSS](https://github.com/octarinesec/kccss), the Kubernetes Common Configuration Scoring System. 
 
 KCCSS is similar to the Common Vulnerability Scoring System (CVSS), the industry-standard for rating vulnerabilities, but instead focuses on the configurations and security settings themselves. Vulnerabilities are always detrimental, but configuration settings can be insecure, neutral, or critical for protection or remediation. KCCSS scores both risks and remediations as separate rules, and allows users to calculate a risk for every runtime setting of a workload and then to calculate the total risk of the workload.
 
