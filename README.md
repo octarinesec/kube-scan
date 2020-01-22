@@ -60,7 +60,7 @@ kube-scan-ui container with CLIENT_TAG_NAME
 
 Apply the desired yaml and use "quick start" or "using load-balancer" instructions 
 
-## Uninstall kube-scan
+## Uninstall
 ```bash
 kubectl delete -f kube-scan.yaml
 ```
