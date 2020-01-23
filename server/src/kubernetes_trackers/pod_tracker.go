@@ -113,7 +113,16 @@ func newContainerSecurityContext(podSpec corev1.PodSpec, container corev1.Contai
 		}
 	}
 
-	if container.SecurityContext != nil && container.SecurityContext.RunAsUser != nil {
+	runAsNonRoot := false
+	if container.SecurityContext != nil && container.SecurityContext.RunAsNonRoot != nil {
+		runAsNonRoot = *container.SecurityContext.RunAsNonRoot
+	} else if podSpec.SecurityContext != nil && podSpec.SecurityContext.RunAsNonRoot != nil {
+		runAsNonRoot = *podSpec.SecurityContext.RunAsNonRoot
+	}
+
+	if runAsNonRoot {
+		runAsRoot = false
+	} else if container.SecurityContext != nil && container.SecurityContext.RunAsUser != nil {
 		runAsRoot = *container.SecurityContext.RunAsUser == 0
 	} else if podSpec.SecurityContext != nil && podSpec.SecurityContext.RunAsUser != nil {
 		runAsRoot = *podSpec.SecurityContext.RunAsUser == 0
