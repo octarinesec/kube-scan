@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build server image
+      shell: bash
+      run: |
+        cd server; docker build -t kubescan-scanner:latest .
+    - name: Build client image
+      shell: bash
+      run: |
+        cd client; docker build -t kubescan-scanner-ui:latest .
