@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "name" . }}
+  labels:
+    app: {{ template "name" . }}
+spec:
+  ports:
+    - name: kube-scan-ui
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: {{ template "name" . }}
+{{ toYaml .Values.serviceType | indent 2 }}
+

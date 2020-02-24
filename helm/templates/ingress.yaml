@@ -1,0 +1,21 @@
+{{- if and .Values.ingress.isIngressEnabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "name" . }}-regional
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.hostedZone }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ template "name" . }}
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - {{ .Values.ingress.hostedZone }}
+    secretName: {{ .Values.ingress.certName }}
+{{- end }}

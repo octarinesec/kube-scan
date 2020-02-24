@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "name" . }}
+  labels:
+    app: {{ template "name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "name" . }}
+  template:
+    metadata:
+      labels:
+{{ toYaml .Values.deployment.labels | indent 8 }}
+        app: {{ template "name" . }}
+    spec:
+      containers:
+        - name: {{ template "name" . }}-ui
+          image: "{{ .Values.image.ui.repository }}:{{ .Values.image.ui.tag }}"
+          imagePullPolicy: {{ .Values.image.ui.pullPolicy }}
+          env:
+            - name: API_SERVER_PORT
+              value: "{{ .Values.apiPort}}"
+            - name: CONTACT_LINK
+              value: "{{ .Values.contactLink}}"
+            - name: WEBSITE_LINK
+              value: "{{ .Values.websiteLink}}"
+        - name: {{ template "name" . }}
+          env:
+            - name: KUBESCAN_PORT
+              value: "{{ .Values.kubeScanPort}}"
+            - name: KUBESCAN_RISK_CONFIG_FILE_PATH
+              value: "/etc/kubescan/risk-config.yaml"
+            - name: KUBESCAN_REFRESH_STATE_INTERVAL_MINUTES
+              value: "{{ .Values.refreshStateInterval }}"
+          image: "{{ .Values.image.scanner.repository }}:{{ .Values.image.scanner.tag }}"
+          imagePullPolicy: {{ .Values.image.scanner.pullPolicy }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/kubescan
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "name" . }}
+            defaultMode: 420
+      serviceAccountName: {{ template "name" . }}

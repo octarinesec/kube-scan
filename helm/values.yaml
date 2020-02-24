@@ -1,0 +1,53 @@
+
+##Values to be provided to the deploment
+deployment:
+  labels:
+  ##Any labels required for the pods
+
+##Image specs
+image:
+  ui:
+    repository: octarinesec/kubescan-scanner-ui
+    tag: "20.0"
+    pullPolicy: IfNotPresent
+  scanner:
+    repository: octarinesec/kubescan-scanner
+    tag: "20.0"
+    pullPolicy: IfNotPresent
+
+##API port
+apiPort: 80
+
+##Kube-Scan port
+kubeScanPort: 80
+
+##Contact Link for sending requests to Octarine
+contactLink: mailto:info@octarinesec.com?subject=Octarine%20Contact%20Request
+
+##Octarine website
+websiteLink: https://www.octarinesec.com
+
+##Refresh interval
+refreshStateInterval: 1440
+
+##If you wish to use an ingress for the UI, configure the below section
+ingress:
+  isIngressEnabled: false
+  #hostedZone: <Your hostedZone>
+  #certName: <Your cert name(Typically the chart name)>
+  #annotations:
+    ##Any annotations required for the ingress
+
+##If you use an ingress, you will need an http certificate. Configure below and create the Cert with Cert-Manager
+cert: 
+  isCertEnabled: false
+  #issuerName: letsencrypt-prod-cluster-issuer
+  #issuerType: ClusterIssuer
+  #dns: <Your DNS name>
+  #provider: <Your provider>
+
+##The service type. Only switch to load balancer if you are not using the ingress
+serviceType:
+  ##type: LoadBalancer
+  type: ClusterIP
+
