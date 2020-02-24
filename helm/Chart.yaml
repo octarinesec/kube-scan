@@ -4,6 +4,7 @@ engine: gotpl
 maintainers:
 name: kube-scan
 sources:
-version: 0.0.1
+- https://github.com/octarinesec/kube-scan
+version: 0.1
 appVersion: 20.0
 tillerVersion: ">=2.12.0"
