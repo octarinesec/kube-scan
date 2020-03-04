@@ -86,7 +86,7 @@ data:
         - name: "CapNetRaw"
           title: "Workload has a container(s) with NET_RAW capability"
           shortDescription: "NET_RAW capability enables ARP spoofing from the container\nNET_RAW capability enables the container to craft malicious raw packet"
-          description: "The capability NET_RAW allows the container to craft any packet, including \"malformed\" or malicious packets"
+          description: "The capability NET_RAW allows the container to craft any packet, including malformed or malicious packets"
           confidentiality: "High"
           confidentialityDescription: "This capability enables ARP spoofing from the container, which means UDP packets can be sent with a forged source IP, etc. This enables the container to perform Man-in-the-Middle (MitM) attacks on the host network"
           integrity: "None"
