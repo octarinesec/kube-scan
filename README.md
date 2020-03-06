@@ -62,12 +62,12 @@ Apply the desired yaml and use "quick start" or "using load-balancer" instructio
 
 ## Uninstall
 ```bash
-kubectl delete -f kube-scan.yaml
+kubectl delete -f https://raw.githubusercontent.com/octarinesec/kube-scan/master/kube-scan.yaml
 ```
 
 In case of using a load-balancer:
 ```bash
-kubectl delete -f kube-scan-lb.yaml
+kubectl delete -f https://raw.githubusercontent.com/octarinesec/kube-scan/master/kube-scan-lb.yaml
 ```
 
 # Screenshots
