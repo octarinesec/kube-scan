@@ -14,6 +14,8 @@ Kube-Scan gives a risk score, from 0 (no risk) to 10 (high risk) for each worklo
 
 KCCSS is similar to the Common Vulnerability Scoring System (CVSS), the industry-standard for rating vulnerabilities, but instead focuses on the configurations and security settings themselves. Vulnerabilities are always detrimental, but configuration settings can be insecure, neutral, or critical for protection or remediation. KCCSS scores both risks and remediations as separate rules, and allows users to calculate a risk for every runtime setting of a workload and then to calculate the total risk of the workload.
 
+**Please notice** that kube-scan currently scans the cluster when starting and will re-scan it every 24 hours. Thus, if you want to get an up-to-date risk score (e.g. after installing a new app), you should restart the kube-scan pod.
+
 ## Quickstart
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/octarinesec/kube-scan/master/kube-scan.yaml
