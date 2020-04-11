@@ -1,20 +1,21 @@
 # ----------------
 # STEP 1:
 # build with pkg
-FROM node:latest AS build
+FROM node:12.16.2-alpine AS build
 WORKDIR /app
 
 # install dependencies with cache
 COPY package.json .
-COPY yarn.lock .
-RUN yarn
+COPY package-lock.json .
 # copy app files, build and package
 COPY . /app
+RUN npm install
 
 ENV PORT 8080
 ENV PKG_CACHE_PATH .pkg-cache-upx
 
-RUN yarn build --prod && npx pkg . -t node8-alpine-x64 --output app
+RUN npm rebuild node-sass
+RUN npm run build --prod && npx pkg . -t node8-alpine-x64 --output app
 
 # ----------------
 # STEP 2:
