@@ -10,7 +10,7 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "@octarine/ui-common": "github:octarinesec/ui-common",
+    "@octarine/ui-common": "github:octarinesec/ui-common#e7e55f2db1936b214d57036f00296609eb3aad7a",
     "classnames": "^2.2.6",
     "css-loader": "1.0.1",
     "express": "^4.16.2",
@@ -30,6 +30,9 @@
   "devDependencies": {
     "pkg": "^4.3.7",
     "razzle-plugin-scss": "^3.0.0"
+  },
+  "resolutions": {
+    "acorn": "6.4.1"
   },
   "bin": "build/server.js",
   "pkg": {
