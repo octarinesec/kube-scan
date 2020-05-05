@@ -54,8 +54,12 @@ func readClusterState() error {
 func refreshState(refreshIntervalMinutes int) {
 	ticker := time.NewTicker(time.Duration(refreshIntervalMinutes) * time.Minute)
 	for range ticker.C {
-		if err := readClusterState(); err != nil {
-			glog.Errorf("error refreshing cluster state: %v", err)
-		}
+		tryRefreshState()
+	}
+}
+
+func tryRefreshState() {
+	if err := readClusterState(); err != nil {
+		glog.Errorf("error refreshing cluster state: %v", err)
 	}
 }
