@@ -44,9 +44,11 @@ apiRouter.post("/", async function(req, res) {
   try {
     let url = `${host}:${port}${req.baseUrl.replace("/api", "")}`;
     console.log("Requesting refresh ", url);
-    await fetch(url, {method: 'post'});
+    await fetch(url, {method: 'post'})
+    await res.json({ SUCCESS: "Refresh succeeded" });
   } catch (err) {
-    console.log("Error requesting refresh:", err);
+    console.log("Error fetching API JSON:", err);
+    await res.json({ ERROR: "no server connection" });
   }
 });
 
