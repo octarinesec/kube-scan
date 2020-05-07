@@ -124,7 +124,7 @@ function App(props) {
     const result = await fetch("/api/refreshing_status");
     const { refreshing } = await result.json();
 
-    if (state.refreshing !== refreshing) {
+    if (state.refreshing && !refreshing) {
       fetchData();
     }
 
