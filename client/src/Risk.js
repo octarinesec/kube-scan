@@ -4,6 +4,7 @@ import App, {DataContext} from './App';
 import './Risk.scss';
 import OCTableCell from "./components/CommonTable/OCTableCell";
 import K8sRisksTable from "./components/Risk/K8sRisksTable";
+import { parseK8sRisksWorkloads } from "@octarine/ui-common";
 
 function Risk() {
     return (
@@ -13,7 +14,7 @@ function Risk() {
                     <div className="Risk oc-main-page">
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
-                            <button className='refresh-state-btn'>Refresh State</button>
+                            <button onClick={value.onRefreshClick} className='refresh-state-btn'>Refresh</button>
                         </div>
                         <K8sRisksTable
                             risks={value.state ? value.state['data']:null}

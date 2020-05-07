@@ -96,18 +96,25 @@ const initialState = {
 function App(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await fetch("/api/risks");
-      const { data } = await result.json();
+  async function fetchData() {
+    const result = await fetch("/api/risks");
+    const { data } = await result.json();
 
-      dispatch({
-        type: "set",
-        data: { data: parseK8sRisksWorkloads(data) }
-      });
-    }
+    dispatch({
+      type: "set",
+      data: { data: parseK8sRisksWorkloads(data) }
+    });
+  }
+
+  useEffect(() => {
     fetchData();
   }, []);
+
+  async function refreshState() {
+    const result = await fetch("/api/refresh", {method: 'post'});
+    await result.json();
+    fetchData();
+  }
 
   function closePopup() {
     dispatch({
@@ -118,7 +125,7 @@ function App(props) {
     <div className={cNames}>
       <Toolbar contactLink={runtimeConfig.contactLink} />
       <div className="app-main-row">
-        <DataContext.Provider value={{ state, dispatch }}>
+        <DataContext.Provider value={{ state, dispatch, onRefreshClick: refreshState }}>
           <div className="current-page-wrapper">{props.children}</div>
         </DataContext.Provider>
       </div>
