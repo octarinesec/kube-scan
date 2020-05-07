@@ -21,16 +21,16 @@ func getRisk(c *gin.Context) {
 		c.AbortWithStatus(http.StatusNoContent)
 		return
 	}
-
 	riskData := rest.GetClusterRiskWorkloads(ClusterState)
 	c.JSON(http.StatusOK, rest.ClusterRiskData{Data: riskData})
 }
 
 func getRefreshingStatus(c *gin.Context) {
 	type refreshStatus struct {
-		Refreshing bool `json:"refreshing"`
+		LastRefresh int64 `json:"lastRefresh"`
+		Refreshing  bool  `json:"refreshing"`
 	}
-	c.JSON(http.StatusOK, refreshStatus{Refreshing: RefreshingCluster})
+	c.JSON(http.StatusOK, refreshStatus{Refreshing: RefreshingCluster, LastRefresh: LastRefresh})
 }
 
 func runRefreshState(c *gin.Context) {

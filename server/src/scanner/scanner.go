@@ -14,10 +14,12 @@ var (
 
 	ClusterState      *state.Cluster
 	RefreshingCluster bool
+	LastRefresh       int64
 )
 
 func InitScanner(refreshIntervalMinutes int, riskConfigFilePath string) error {
 	RefreshingCluster = false
+	LastRefresh = 0
 
 	var err error
 	stateReader, err = state_reader.NewClusterStateReader()
@@ -70,5 +72,6 @@ func tryRefreshState() {
 	if err := readClusterState(); err != nil {
 		glog.Errorf("error refreshing cluster state: %v", err)
 	}
+	LastRefresh = time.Now().UnixNano() / int64(time.Millisecond)
 	RefreshingCluster = false
 }
