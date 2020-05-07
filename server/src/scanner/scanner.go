@@ -12,10 +12,13 @@ var (
 	stateReader *state_reader.ClusterStateReader
 	riskFormula *risk.Formula
 
-	ClusterState *state.Cluster
+	ClusterState      *state.Cluster
+	RefreshingCluster bool
 )
 
 func InitScanner(refreshIntervalMinutes int, riskConfigFilePath string) error {
+	RefreshingCluster = false
+
 	var err error
 	stateReader, err = state_reader.NewClusterStateReader()
 	if err != nil {
@@ -59,7 +62,13 @@ func refreshState(refreshIntervalMinutes int) {
 }
 
 func tryRefreshState() {
+	if RefreshingCluster {
+		return
+	}
+
+	RefreshingCluster = true
 	if err := readClusterState(); err != nil {
 		glog.Errorf("error refreshing cluster state: %v", err)
 	}
+	RefreshingCluster = false
 }
