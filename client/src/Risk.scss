@@ -1,10 +1,38 @@
 .Risk {
   padding: 0 40px;
 
-  h2 {
-    font-weight: 100;
-    color: #5e5e5e;
-    font-size: 28px;
-    margin-bottom: 0;
+  .Home-header {
+    display: flex;
+    align-items: center;
+
+    h2 {
+      font-weight: 100;
+      color: #5e5e5e;
+      font-size: 28px;
+      margin-bottom: 0;
+    }
+
+    .refresh-state-btn {
+      position: absolute;
+      right: 0;
+      margin: 20px 10px;
+      padding: 6px 10px;
+      border: solid 1px white;
+      background-color: #5e4c73;
+      font-size: 12px;
+      border-radius: 4px;
+      color: #e4e0e8;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #451d73;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
   }
+
 }

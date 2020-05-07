@@ -40,6 +40,16 @@ apiRouter.get("/", async function(req, res) {
   }
 });
 
+apiRouter.post("/", async function(req, res) {
+  try {
+    let url = `${host}:${port}${req.baseUrl.replace("/api", "")}`;
+    console.log("Requesting refresh ", url);
+    await fetch(url, {method: 'post'});
+  } catch (err) {
+    console.log("Error requesting refresh:", err);
+  }
+});
+
 server.use("/api/*", apiRouter);
 
 server.use((req, res) => {

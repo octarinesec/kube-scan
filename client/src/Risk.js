@@ -13,6 +13,7 @@ function Risk() {
                     <div className="Risk oc-main-page">
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
+                            <button className='refresh-state-btn'>Refresh State</button>
                         </div>
                         <K8sRisksTable
                             risks={value.state ? value.state['data']:null}
