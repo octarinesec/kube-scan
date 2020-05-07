@@ -16,8 +16,8 @@ console.log(`> PORT: ${process.env.PORT}`);
 console.log(`> API_SERVER_HOST: ${process.env.API_SERVER_HOST}`);
 console.log(`> API_SERVER_PORT: ${process.env.API_SERVER_PORT}`);
 
-const host = process.env.API_SERVER_HOST || "http://52.191.17.27";
-const port = process.env.API_SERVER_PORT || "80";
+const host = process.env.API_SERVER_HOST || "http://localhost";
+const port = process.env.API_SERVER_PORT || "8081";
 
 const server = express();
 
