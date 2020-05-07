@@ -59,6 +59,11 @@ function reducer(state, action) {
 
       return newState;
     case "setRefreshState":
+
+      if (action.fetchData && state.refreshing && !action.refreshing) {
+        action.fetchData()
+      }
+
       return {
         data: state.data,
         sortField: state.sortField,
@@ -124,13 +129,10 @@ function App(props) {
     const result = await fetch("/api/refreshing_status");
     const { refreshing } = await result.json();
 
-    if (state.refreshing && !refreshing) {
-      fetchData();
-    }
-
     dispatch({
       type: "setRefreshState",
-      refreshing: refreshing
+      refreshing: refreshing,
+      fetchData: fetchData,
     });
 
     await new Promise(resolve => setTimeout(resolve, getRefreshStatusIntervalSeconds * 1000));
