@@ -27,5 +27,5 @@ func getRisk(c *gin.Context) {
 
 func runRefreshState(c *gin.Context) {
 	go tryRefreshState()
-	c.Status(http.StatusOK)
+	c.Status(http.StatusNoContent)
 }
