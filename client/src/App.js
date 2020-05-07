@@ -9,6 +9,7 @@ import { get as lookupGet } from "lodash";
 import { RiskBreakdownPopup, parseK8sRisksWorkloads } from "@octarine/ui-common";
 import "@octarine/ui-common/dist/main.css";
 
+const getRefreshStatusIntervalSeconds = 5
 let cNames = "OCApp side-menu-on";
 
 export const DataContext = React.createContext(null);
@@ -49,13 +50,22 @@ function reducer(state, action) {
         data: action.data.data,
         sortField: state.sortField,
         ascending: state.ascending,
-        popupOn: state.popupOn
+        popupOn: state.popupOn,
+        refreshing: state.refreshing
       };
       if (newState.data) {
         newState.data.sort(sortData(state.sortField, state.ascending));
       }
 
       return newState;
+    case "setRefreshState":
+      return {
+        data: state.data,
+        sortField: state.sortField,
+        ascending: state.ascending,
+        popupOn: state.popupOn,
+        refreshing: action.refreshing
+      }
     case "sort":
       if (state.sortField === action.sortField) {
         state.ascending = !state.ascending;
@@ -64,7 +74,8 @@ function reducer(state, action) {
       return {
         data: state.data,
         sortField: action.sortField,
-        ascending: state.ascending
+        ascending: state.ascending,
+        refreshing: state.refreshing
       };
     case "popup":
       return {
@@ -72,14 +83,16 @@ function reducer(state, action) {
         sortField: state.sortField,
         ascending: state.ascending,
         popupOn: true,
-        popupData: action.riskData
+        popupData: action.riskData,
+        refreshing: state.refreshing
       };
     case "closePopup":
       return {
         data: state.data,
         sortField: state.sortField,
         ascending: state.ascending,
-        popupOn: false
+        popupOn: false,
+        refreshing: state.refreshing
       };
     default:
       throw new Error();
@@ -90,7 +103,8 @@ const initialState = {
   data: null,
   sortField: "risk.riskScore",
   ascending: false,
-  popupOn: false
+  popupOn: false,
+  refreshing: false
 };
 
 function App(props) {
@@ -106,14 +120,35 @@ function App(props) {
     });
   }
 
+  async function updateRefreshingStatus() {
+    const result = await fetch("/api/refreshing_status");
+    const { refreshing } = await result.json();
+
+    if (state.refreshing !== refreshing) {
+      fetchData();
+    }
+
+    dispatch({
+      type: "setRefreshState",
+      refreshing: refreshing
+    });
+
+    await new Promise(resolve => setTimeout(resolve, getRefreshStatusIntervalSeconds * 1000));
+    await updateRefreshingStatus();
+  }
+
   useEffect(() => {
     fetchData();
+    updateRefreshingStatus()
   }, []);
 
   async function refreshState() {
+    dispatch({
+      type: "setRefreshState",
+      refreshing: true
+    });
     const result = await fetch("/api/refresh", {method: 'post'});
     await result.json();
-    fetchData();
   }
 
   function closePopup() {
