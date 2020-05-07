@@ -51,7 +51,9 @@ function reducer(state, action) {
         sortField: state.sortField,
         ascending: state.ascending,
         popupOn: state.popupOn,
-        refreshing: state.refreshing
+        refreshing: state.refreshing,
+        lastRefresh: state.lastRefresh,
+        lastFetch: action.data.lastFetch
       };
       if (newState.data) {
         newState.data.sort(sortData(state.sortField, state.ascending));
@@ -59,18 +61,19 @@ function reducer(state, action) {
 
       return newState;
     case "setRefreshState":
-
-      if (action.fetchData && state.refreshing && !action.refreshing) {
-        action.fetchData()
-      }
-
-      return {
+      let afterRefreshState = {
         data: state.data,
         sortField: state.sortField,
         ascending: state.ascending,
         popupOn: state.popupOn,
-        refreshing: action.refreshing
+        refreshing: action.data.refreshing,
+        lastRefresh: action.data.lastRefresh ? action.data.lastRefresh : state.lastRefresh,
+        lastFetch: state.lastFetch
       }
+      if (action.data.fetchData && afterRefreshState.lastRefresh > afterRefreshState.lastFetch) {
+        action.data.fetchData()
+      }
+      return afterRefreshState
     case "sort":
       if (state.sortField === action.sortField) {
         state.ascending = !state.ascending;
@@ -80,7 +83,9 @@ function reducer(state, action) {
         data: state.data,
         sortField: action.sortField,
         ascending: state.ascending,
-        refreshing: state.refreshing
+        refreshing: state.refreshing,
+        lastRefresh: state.lastRefresh,
+        lastFetch: state.lastFetch
       };
     case "popup":
       return {
@@ -89,7 +94,9 @@ function reducer(state, action) {
         ascending: state.ascending,
         popupOn: true,
         popupData: action.riskData,
-        refreshing: state.refreshing
+        refreshing: state.refreshing,
+        lastRefresh: state.lastRefresh,
+        lastFetch: state.lastFetch
       };
     case "closePopup":
       return {
@@ -97,7 +104,9 @@ function reducer(state, action) {
         sortField: state.sortField,
         ascending: state.ascending,
         popupOn: false,
-        refreshing: state.refreshing
+        refreshing: state.refreshing,
+        lastRefresh: state.lastRefresh,
+        lastFetch: state.lastFetch
       };
     default:
       throw new Error();
@@ -109,45 +118,59 @@ const initialState = {
   sortField: "risk.riskScore",
   ascending: false,
   popupOn: false,
-  refreshing: false
+  refreshing: false,
+  lastRefresh: 0,
+  lastFetch: 0
 };
 
 function App(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function fetchData() {
+    const fetchTime = Date.now()
     const result = await fetch("/api/risks");
-    const { data } = await result.json();
+    const {data} = await result.json();
 
     dispatch({
       type: "set",
-      data: { data: parseK8sRisksWorkloads(data) }
+      data: {
+        data: parseK8sRisksWorkloads(data),
+        lastFetch: fetchTime
+      }
     });
   }
 
   async function updateRefreshingStatus() {
     const result = await fetch("/api/refreshing_status");
-    const { refreshing } = await result.json();
+    const {refreshing, lastRefresh} = await result.json();
 
     dispatch({
       type: "setRefreshState",
-      refreshing: refreshing,
-      fetchData: fetchData,
+      data: {
+        refreshing: refreshing,
+        lastRefresh: lastRefresh,
+        fetchData,
+      }
     });
 
-    await new Promise(resolve => setTimeout(resolve, getRefreshStatusIntervalSeconds * 1000));
-    await updateRefreshingStatus();
+    setTimeout(runUpdateRefreshingStatus, getRefreshStatusIntervalSeconds * 1000)
+  }
+
+  function runUpdateRefreshingStatus() {
+    updateRefreshingStatus()
   }
 
   useEffect(() => {
     fetchData();
-    updateRefreshingStatus()
+    runUpdateRefreshingStatus()
   }, []);
 
   async function refreshState() {
     dispatch({
       type: "setRefreshState",
-      refreshing: true
+      data: {
+        refreshing: true
+      }
     });
     const result = await fetch("/api/refresh", {method: 'post'});
     await result.json();
@@ -158,21 +181,22 @@ function App(props) {
       type: "closePopup"
     });
   }
+
   return (
-    <div className={cNames}>
-      <Toolbar contactLink={runtimeConfig.contactLink} />
+    <div className={ cNames }>
+      <Toolbar contactLink={ runtimeConfig.contactLink } />
       <div className="app-main-row">
-        <DataContext.Provider value={{ state, dispatch, onRefreshClick: refreshState }}>
-          <div className="current-page-wrapper">{props.children}</div>
+        <DataContext.Provider value={ {state, dispatch, onRefreshClick: refreshState} }>
+          <div className="current-page-wrapper">{ props.children }</div>
         </DataContext.Provider>
       </div>
-      <BottomBar websiteLink={runtimeConfig.websiteLink} />
-      {state.popupOn ? (
+      <BottomBar websiteLink={ runtimeConfig.websiteLink } />
+      { state.popupOn ? (
         <RiskBreakdownPopup
-          workload={state.popupData}
-          onClose={closePopup}
+          workload={ state.popupData }
+          onClose={ closePopup }
         ></RiskBreakdownPopup>
-      ) : null}
+      ) : null }
     </div>
   );
 }
