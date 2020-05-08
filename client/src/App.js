@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./fonts/fonts.scss";
 import "./index.scss";
 import "./App.scss";
@@ -9,6 +9,7 @@ import { get as lookupGet } from "lodash";
 import { RiskBreakdownPopup, parseK8sRisksWorkloads } from "@octarine/ui-common";
 import "@octarine/ui-common/dist/main.css";
 
+const getRefreshStatusIntervalSeconds = 3
 let cNames = "OCApp side-menu-on";
 
 export const DataContext = React.createContext(null);
@@ -42,93 +43,77 @@ let sortData = (sortField, ascending) => {
   };
 };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "set":
-      let newState = {
-        data: action.data.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: state.popupOn
-      };
-      if (newState.data) {
-        newState.data.sort(sortData(state.sortField, state.ascending));
-      }
-
-      return newState;
-    case "sort":
-      if (state.sortField === action.sortField) {
-        state.ascending = !state.ascending;
-      }
-      state.data.sort(sortData(action.sortField, state.ascending));
-      return {
-        data: state.data,
-        sortField: action.sortField,
-        ascending: state.ascending
-      };
-    case "popup":
-      return {
-        data: state.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: true,
-        popupData: action.riskData
-      };
-    case "closePopup":
-      return {
-        data: state.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: false
-      };
-    default:
-      throw new Error();
-  }
-}
-
-const initialState = {
-  data: null,
-  sortField: "risk.riskScore",
-  ascending: false,
-  popupOn: false
-};
-
 function App(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [refreshing, setRefreshing] = useState(false);
+  const [risksData, setRisksData] = useState(null);
+  const [sortField, setSortField] = useState("risk.riskScore");
+  const [ascending, setAscending] = useState(false);
+  const [popupData, setPopupData] = useState(null);
+
+  async function fetchData() {
+    const result = await fetch("/api/risks");
+    const {data} = await result.json();
+    setRisksData(parseK8sRisksWorkloads(data))
+  }
+
+  async function updateRefreshingStatus(lastFetch) {
+    const result = await fetch("/api/refreshing_status");
+    const {refreshing, lastRefresh} = await result.json();
+    setRefreshing(refreshing)
+    if (lastRefresh > lastFetch) {
+      lastFetch = Date.now()
+      await fetchData()
+    }
+    await new Promise(resolve => setTimeout(resolve, getRefreshStatusIntervalSeconds * 1000));
+    await updateRefreshingStatus(lastFetch)
+  }
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await fetch("/api/risks");
-      const { data } = await result.json();
-
-      dispatch({
-        type: "set",
-        data: { data: parseK8sRisksWorkloads(data) }
-      });
-    }
-    fetchData();
+    fetchData().then()
+    updateRefreshingStatus(Date.now()).then()
   }, []);
 
-  function closePopup() {
-    dispatch({
-      type: "closePopup"
-    });
+  async function refreshState() {
+    setRefreshing(true)
+    const result = await fetch("/api/refresh", {method: 'post'});
+    await result.json();
   }
+
+  function openPopup(newPopupData) {
+    setPopupData(newPopupData)
+  }
+
+  function closePopup() {
+    setPopupData(null)
+  }
+
+  let risks = risksData
+  if (risks) {
+    risks.sort(sortData(sortField, ascending))
+  }
+
+  function sortFunc(newSortField) {
+    if (sortField === newSortField) {
+      setAscending(!ascending);
+    }
+    setSortField(newSortField)
+  }
+
   return (
-    <div className={cNames}>
-      <Toolbar contactLink={runtimeConfig.contactLink} />
+    <div className={ cNames }>
+      <Toolbar contactLink={ runtimeConfig.contactLink } />
       <div className="app-main-row">
-        <DataContext.Provider value={{ state, dispatch }}>
-          <div className="current-page-wrapper">{props.children}</div>
+        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing} }>
+          <div className="current-page-wrapper">{ props.children }</div>
         </DataContext.Provider>
       </div>
-      <BottomBar websiteLink={runtimeConfig.websiteLink} />
-      {state.popupOn ? (
+      <BottomBar websiteLink={ runtimeConfig.websiteLink } />
+      { popupData ? (
         <RiskBreakdownPopup
-          workload={state.popupData}
-          onClose={closePopup}
-        ></RiskBreakdownPopup>
-      ) : null}
+          workload={ popupData }
+          onClose={ closePopup }
+        />
+      ) : null }
     </div>
   );
 }
