@@ -18,6 +18,8 @@ type Cluster struct {
 	mux sync.Mutex
 }
 
+var SystemNamespaces = []string{"octarine", "kube-system", "kube-public", "octarine-tiller", "istio-system", "octarine-dataplane", "kube-scan"}
+
 func NewState(name string) *Cluster {
 	return &Cluster{
 		Name:       name,

@@ -187,20 +187,22 @@ func (w *WorkloadRisk) SetRisk(r *Risk) {
 }
 
 type WorkloadRiskData struct {
-	Kind      string `json:"kind"`
-	Name      string `json:"name"`
-	Namespace string `json:"namespace"`
-	Domain    string `json:"domain"`
-	Risk      *Risk  `json:"risk"`
+	Kind             string `json:"kind"`
+	Name             string `json:"name"`
+	Namespace        string `json:"namespace"`
+	Domain           string `json:"domain"`
+	IsSystemWorkload bool   `json:"isSystemWorkload"`
+	Risk             *Risk  `json:"risk"`
 }
 
-func ToWorkloadRiskData(workload IWorloadRisk) *WorkloadRiskData {
+func ToWorkloadRiskData(workload IWorloadRisk, isSystemWorkload bool) *WorkloadRiskData {
 	return &WorkloadRiskData{
-		Kind:      workload.GetKind(),
-		Name:      workload.GetName(),
-		Namespace: workload.GetNamespace(),
-		Domain:    workload.GetDomain(),
-		Risk:      workload.GetRisk(),
+		Kind:             workload.GetKind(),
+		Name:             workload.GetName(),
+		Namespace:        workload.GetNamespace(),
+		Domain:           workload.GetDomain(),
+		IsSystemWorkload: isSystemWorkload,
+		Risk:             workload.GetRisk(),
 	}
 }
 
