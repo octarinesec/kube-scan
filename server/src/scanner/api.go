@@ -30,7 +30,8 @@ func getRefreshingStatus(c *gin.Context) {
 		LastRefresh int64 `json:"lastRefresh"`
 		Refreshing  bool  `json:"refreshing"`
 	}
-	c.JSON(http.StatusOK, refreshStatus{Refreshing: RefreshingCluster, LastRefresh: LastRefresh})
+	refreshing, lastRefresh := getRefresh()
+	c.JSON(http.StatusOK, refreshStatus{Refreshing: refreshing, LastRefresh: lastRefresh})
 }
 
 func runRefreshState(c *gin.Context) {

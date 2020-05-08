@@ -5,12 +5,14 @@ import (
 	"kube-scan/risk"
 	"kube-scan/state"
 	"kube-scan/state_reader"
+	"sync"
 	"time"
 )
 
 var (
 	stateReader *state_reader.ClusterStateReader
 	riskFormula *risk.Formula
+	refreshMux  sync.Mutex
 
 	ClusterState      *state.Cluster
 	RefreshingCluster bool
@@ -64,14 +66,30 @@ func refreshState(refreshIntervalMinutes int) {
 }
 
 func tryRefreshState() {
+	refreshMux.Lock()
 	if RefreshingCluster {
+		refreshMux.Unlock()
 		return
 	}
-
 	RefreshingCluster = true
+	refreshMux.Unlock()
+
 	if err := readClusterState(); err != nil {
 		glog.Errorf("error refreshing cluster state: %v", err)
 	}
+
+	finishRefresh()
+}
+
+func getRefresh() (bool, int64) {
+	defer refreshMux.Unlock()
+	refreshMux.Lock()
+	return RefreshingCluster, LastRefresh
+}
+
+func finishRefresh() {
+	refreshMux.Lock()
 	LastRefresh = time.Now().UnixNano() / int64(time.Millisecond)
 	RefreshingCluster = false
+	refreshMux.Unlock()
 }
