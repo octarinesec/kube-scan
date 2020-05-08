@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./fonts/fonts.scss";
 import "./index.scss";
 import "./App.scss";
@@ -9,7 +9,7 @@ import { get as lookupGet } from "lodash";
 import { RiskBreakdownPopup, parseK8sRisksWorkloads } from "@octarine/ui-common";
 import "@octarine/ui-common/dist/main.css";
 
-const getRefreshStatusIntervalSeconds = 5
+const getRefreshStatusIntervalSeconds = 3
 let cNames = "OCApp side-menu-on";
 
 export const DataContext = React.createContext(null);
@@ -43,159 +43,76 @@ let sortData = (sortField, ascending) => {
   };
 };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "set":
-      let newState = {
-        data: action.data.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: state.popupOn,
-        refreshing: state.refreshing,
-        lastRefresh: state.lastRefresh,
-        lastFetch: action.data.lastFetch
-      };
-      if (newState.data) {
-        newState.data.sort(sortData(state.sortField, state.ascending));
-      }
-
-      return newState;
-    case "setRefreshState":
-      let afterRefreshState = {
-        data: state.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: state.popupOn,
-        refreshing: action.data.refreshing,
-        lastRefresh: action.data.lastRefresh ? action.data.lastRefresh : state.lastRefresh,
-        lastFetch: state.lastFetch
-      }
-      if (action.data.fetchData && afterRefreshState.lastRefresh > afterRefreshState.lastFetch) {
-        action.data.fetchData()
-      }
-      return afterRefreshState
-    case "sort":
-      if (state.sortField === action.sortField) {
-        state.ascending = !state.ascending;
-      }
-      state.data.sort(sortData(action.sortField, state.ascending));
-      return {
-        data: state.data,
-        sortField: action.sortField,
-        ascending: state.ascending,
-        refreshing: state.refreshing,
-        lastRefresh: state.lastRefresh,
-        lastFetch: state.lastFetch
-      };
-    case "popup":
-      return {
-        data: state.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: true,
-        popupData: action.riskData,
-        refreshing: state.refreshing,
-        lastRefresh: state.lastRefresh,
-        lastFetch: state.lastFetch
-      };
-    case "closePopup":
-      return {
-        data: state.data,
-        sortField: state.sortField,
-        ascending: state.ascending,
-        popupOn: false,
-        refreshing: state.refreshing,
-        lastRefresh: state.lastRefresh,
-        lastFetch: state.lastFetch
-      };
-    default:
-      throw new Error();
-  }
-}
-
-const initialState = {
-  data: null,
-  sortField: "risk.riskScore",
-  ascending: false,
-  popupOn: false,
-  refreshing: false,
-  lastRefresh: 0,
-  lastFetch: 0
-};
-
 function App(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [refreshing, setRefreshing] = useState(false);
+  const [risksData, setRisksData] = useState(null);
+  const [sortField, setSortField] = useState("risk.riskScore");
+  const [ascending, setAscending] = useState(false);
+  const [popupData, setPopupData] = useState(null);
 
   async function fetchData() {
-    const fetchTime = Date.now()
     const result = await fetch("/api/risks");
     const {data} = await result.json();
-
-    dispatch({
-      type: "set",
-      data: {
-        data: parseK8sRisksWorkloads(data),
-        lastFetch: fetchTime
-      }
-    });
+    setRisksData(parseK8sRisksWorkloads(data))
   }
 
-  async function updateRefreshingStatus() {
+  async function updateRefreshingStatus(lastFetch) {
     const result = await fetch("/api/refreshing_status");
     const {refreshing, lastRefresh} = await result.json();
-
-    dispatch({
-      type: "setRefreshState",
-      data: {
-        refreshing: refreshing,
-        lastRefresh: lastRefresh,
-        fetchData,
-      }
-    });
-
-    setTimeout(runUpdateRefreshingStatus, getRefreshStatusIntervalSeconds * 1000)
-  }
-
-  function runUpdateRefreshingStatus() {
-    updateRefreshingStatus()
+    setRefreshing(refreshing)
+    if (lastRefresh > lastFetch) {
+      lastFetch = Date.now()
+      await fetchData()
+    }
+    await new Promise(resolve => setTimeout(resolve, getRefreshStatusIntervalSeconds * 1000));
+    await updateRefreshingStatus(lastFetch)
   }
 
   useEffect(() => {
-    fetchData();
-    runUpdateRefreshingStatus()
+    fetchData().then()
+    updateRefreshingStatus(Date.now()).then()
   }, []);
 
   async function refreshState() {
-    dispatch({
-      type: "setRefreshState",
-      data: {
-        refreshing: true
-      }
-    });
+    setRefreshing(true)
     const result = await fetch("/api/refresh", {method: 'post'});
     await result.json();
   }
 
+  function openPopup(newPopupData) {
+    setPopupData(newPopupData)
+  }
+
   function closePopup() {
-    dispatch({
-      type: "closePopup"
-    });
+    setPopupData(null)
+  }
+
+  let risks = risksData
+  if (risks) {
+    risks.sort(sortData(sortField, ascending))
+  }
+
+  function sortFunc(newSortField) {
+    if (sortField === newSortField) {
+      setAscending(!ascending);
+    }
+    setSortField(newSortField)
   }
 
   return (
     <div className={ cNames }>
       <Toolbar contactLink={ runtimeConfig.contactLink } />
       <div className="app-main-row">
-        <DataContext.Provider value={ {state, dispatch, onRefreshClick: refreshState} }>
+        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing} }>
           <div className="current-page-wrapper">{ props.children }</div>
         </DataContext.Provider>
       </div>
       <BottomBar websiteLink={ runtimeConfig.websiteLink } />
-      { state.popupOn ? (
+      { popupData ? (
         <RiskBreakdownPopup
-          workload={ state.popupData }
+          workload={ popupData }
           onClose={ closePopup }
-        ></RiskBreakdownPopup>
+        />
       ) : null }
     </div>
   );

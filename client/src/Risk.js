@@ -16,16 +16,17 @@ function Risk() {
                     <div className="Risk oc-main-page">
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
-                            <button disabled={value.state.refreshing} onClick={value.onRefreshClick} className='refresh-state-btn'>
-                              {value.state.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
-                              <span>{value.state.refreshing ? "Refreshing..." : "Refresh"}</span>
+                            <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
+                              {value.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
+                              <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
                             </button>
                         </div>
                         <K8sRisksTable
-                            risks={value.state ? value.state['data']:null}
-                            dispatch={value.dispatch}
-                            currentSort={value.state ? value.state['sortField']:null}
-                            ascending={value.state ? value.state['ascending']:null}
+                            risks={value.risks}
+                            openPopup={value.openPopup}
+                            sortFunc={value.sortFunc}
+                            currentSort={value.sortField}
+                            ascending={value.ascending}
                         />
                     </div>
                 )}
