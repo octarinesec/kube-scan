@@ -48,6 +48,7 @@ function App(props) {
   const [risksData, setRisksData] = useState(null);
   const [sortField, setSortField] = useState("risk.riskScore");
   const [ascending, setAscending] = useState(false);
+  const [selectedShowSystemNamespaces, setSelectedShowSystemNamespaces] = useState(false)
   const [popupData, setPopupData] = useState(null);
 
   async function fetchData() {
@@ -103,7 +104,7 @@ function App(props) {
     <div className={ cNames }>
       <Toolbar contactLink={ runtimeConfig.contactLink } />
       <div className="app-main-row">
-        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing} }>
+        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing, selectedShowSystemNamespaces, setSelectedShowSystemNamespaces} }>
           <div className="current-page-wrapper">{ props.children }</div>
         </DataContext.Provider>
       </div>

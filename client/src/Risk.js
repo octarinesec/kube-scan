@@ -1,12 +1,10 @@
-import React, {useEffect, useContext} from 'react';
-import {Link} from 'react-router';
+import React from 'react';
 import App, {DataContext} from './App';
 import './Risk.scss';
-import OCTableCell from "./components/CommonTable/OCTableCell";
 import K8sRisksTable from "./components/Risk/K8sRisksTable";
-import { parseK8sRisksWorkloads } from "@octarine/ui-common";
 import RefreshIcon from '@material-ui/icons/Refresh';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Switch from "./components/Switch";
 
 function Risk() {
     return (
@@ -21,6 +19,13 @@ function Risk() {
                               <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
                             </button>
                         </div>
+                        <Switch
+                          className="risks-include-system-ns"
+                          size={14}
+                          label="Include System namespaces"
+                          isChecked={value.selectedShowSystemNamespaces}
+                          onChange={value.setSelectedShowSystemNamespaces}
+                        />
                         <K8sRisksTable
                             risks={value.risks}
                             openPopup={value.openPopup}
