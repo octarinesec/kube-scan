@@ -54,7 +54,7 @@ function App(props) {
   async function fetchData() {
     const result = await fetch("/api/risks");
     const {data} = await result.json();
-    setRisksData(parseK8sRisksWorkloads(data))
+    setRisksData(data)
   }
 
   async function updateRefreshingStatus(lastFetch) {
@@ -90,6 +90,10 @@ function App(props) {
 
   let risks = risksData
   if (risks) {
+    if (!selectedShowSystemNamespaces) {
+      risks = risks.filter(r => !r.isSystemWorkload)
+    }
+    risks = parseK8sRisksWorkloads(risks)
     risks.sort(sortData(sortField, ascending))
   }
 
