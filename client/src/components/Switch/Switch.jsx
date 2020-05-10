@@ -1,73 +1,28 @@
 import React from 'react';
-import { makeStyles, FormControlLabel } from '@material-ui/core'
+import { FormControlLabel } from '@material-ui/core'
 import MuiSwitch from '@material-ui/core/Switch'
 import classNames from 'classnames';
 
-const useStyles = makeStyles({
-  root: {
-    display: 'flex',
-    width: ({size}) => 2 * (size + 2),
-    height: ({size}) => size + 2,
-    padding: 0,
-    marginRight: 5,
-    overflow: 'visible'
-  },
-  switchBase: {
-    padding: 2,
-    color: 'white',
-    '&.Mui-checked': {
-      transform: ({size}) => `translateX(${ size }px)`,
-      color: 'white',
-      '& + $track': {
-        opacity: 1,
-        backgroundColor: '#795aa4',
-        borderColor: '#795aa4'
-      }
-    }
-  },
-  thumb: {
-    width: ({size}) => size,
-    height: ({size}) => size,
-    boxShadow: 'none'
-  },
-  track: {
-    border: '1px solid #ccc',
-    borderRadius: 50,
-    opacity: 1,
-    backgroundColor: '#ccc'
-  },
-  formControl: {
-    display: 'flex',
-    margin: 0
-  },
-  label: {
-    fontSize: 14,
-    color: '#4a4a4a'
-  }
-})
-
 function Switch(props) {
-  const classes = useStyles(props)
   const {label, isChecked, onChange, className} = props
-
   return (
     <FormControlLabel
       classes={ {
-        root: classNames(classes.formControl, className)
+        root: classNames("makeStyles-formControl-14", className)
       } }
       control={ (
         <MuiSwitch
           checked={ isChecked }
           onChange={ (event) => onChange?.(event.target.checked) }
           classes={ {
-            root: classes.root,
-            switchBase: classes.switchBase,
-            thumb: classes.thumb,
-            track: classes.track
+            root: "makeStyles-root-10 makeStyles-root-16",
+            switchBase: "makeStyles-switchBase-11 makeStyles-switchBase-17",
+            thumb: "makeStyles-thumb-12 makeStyles-thumb-18",
+            track: "makeStyles-track-13"
           } }
         />
       ) }
-      label={ <span className={ classes.label }>{ label }</span> }
+      label={ <span className="makeStyles-label-15">{ label }</span> }
     />
   )
 }
@@ -75,7 +30,7 @@ function Switch(props) {
 export default Switch
 
 const defaultProps = {
-  size: 18,
+  size: 12,
   label: '',
   isChecked: false
 }
