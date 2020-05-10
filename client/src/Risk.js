@@ -14,18 +14,20 @@ function Risk() {
                     <div className="Risk oc-main-page">
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
-                            <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
-                              {value.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
-                              <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
-                            </button>
+                            <div className='right-controls'>
+                              <Switch
+                                className="risks-include-system-ns"
+                                size={14}
+                                label="Include System namespaces"
+                                isChecked={value.selectedShowSystemNamespaces}
+                                onChange={value.setSelectedShowSystemNamespaces}
+                              />
+                              <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
+                                {value.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
+                                <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
+                              </button>
+                            </div>
                         </div>
-                        <Switch
-                          className="risks-include-system-ns"
-                          size={14}
-                          label="Include System namespaces"
-                          isChecked={value.selectedShowSystemNamespaces}
-                          onChange={value.setSelectedShowSystemNamespaces}
-                        />
                         <K8sRisksTable
                             risks={value.risks}
                             openPopup={value.openPopup}
