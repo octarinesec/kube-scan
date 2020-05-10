@@ -8,21 +8,23 @@ function Switch(props) {
   return (
     <FormControlLabel
       classes={ {
-        root: classNames("makeStyles-formControl-14", className)
+        root: className
       } }
       control={ (
         <MuiSwitch
           checked={ isChecked }
           onChange={ (event) => onChange?.(event.target.checked) }
           classes={ {
-            root: "makeStyles-root-10 makeStyles-root-16",
-            switchBase: "makeStyles-switchBase-11 makeStyles-switchBase-17",
-            thumb: "makeStyles-thumb-12 makeStyles-thumb-18",
-            track: "makeStyles-track-13"
+            root: "switch-root",
+            input: "switch-input",
+            'checked': 'switch-checked',
+            switchBase: "switch-base",
+            thumb: "switch-thumb",
+            track: "switch-track"
           } }
         />
       ) }
-      label={ <span className="makeStyles-label-15">{ label }</span> }
+      label={ <span className="switch-label">{ label }</span> }
     />
   )
 }

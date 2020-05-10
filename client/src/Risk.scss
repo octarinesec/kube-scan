@@ -2,13 +2,13 @@
   padding: 0 40px;
 
   .risks-include-system-ns {
-    .MuiTypography-body1 {
+    .switch-label {
       font-family: "Poppins", sans-serif;
       font-size: 14px;
       margin-top: 3px;
     }
 
-    .MuiSwitch-root {
+    .switch-root {
       width: 36px;
       height: 14px;
       display: flex;
@@ -17,11 +17,11 @@
       margin-right: 5px;
     }
 
-    .MuiSwitch-switchBase {
+    .switch-base {
       padding: 1px 0 0 1px;
     }
 
-    .MuiSwitch-track {
+    .switch-track {
       width: 100%;
       height: 100%;
       z-index: -1;
@@ -29,17 +29,17 @@
       border: 1px solid #ccc;
     }
 
-    .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+    .switch-checked + .switch-track {
       background-color: var(--oc-primary-bg-color);
       border-color: var(--oc-primary-bg-color);
       opacity: 1;
     }
 
-    .MuiSwitch-colorSecondary.Mui-checked {
+    .switch-checked {
       color: white;
     }
 
-    .MuiSwitch-thumb {
+    .switch-thumb {
       width: 14px;
       height: 14px;
       box-shadow: none;
@@ -47,7 +47,7 @@
       background-color: currentColor;
     }
 
-    .MuiSwitch-input {
+    .switch-input {
       top: 0;
       cursor: inherit;
       height: 100%;
@@ -56,14 +56,6 @@
       padding: 0;
       z-index: 1;
       position: absolute;
-    }
-
-    .jss48.Mui-checked {
-      color: white;
-    }
-
-    .jss54.Mui-checked {
-      transform: translateX(14px);
     }
   }
 
