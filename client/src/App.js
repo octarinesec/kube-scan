@@ -88,7 +88,7 @@ function App(props) {
     setPopupData(null)
   }
 
-  let risks = risksData
+  let risks = risksData ? [...risksData] : null
   if (risks) {
     if (!selectedShowSystemNamespaces) {
       risks = risks.filter(r => !r.isSystemWorkload)

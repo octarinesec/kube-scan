@@ -96,14 +96,15 @@
         width: 125px;
         text-align: right;
 
-        .refreshIcon {
-          font-size: 16px;
-          color: white;
-        }
+      .refreshIcon {
+        font-size: 18px;
+        color: white;
+      }
 
-        span {
-          padding-left: 12px;
-        }
+      span {
+        padding-left: 12px;
+        padding-bottom: 4px;
+      }
 
         &:hover {
           cursor: pointer;

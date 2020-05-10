@@ -23,7 +23,7 @@ function Risk() {
                                 onChange={value.setSelectedShowSystemNamespaces}
                               />
                               <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
-                                {value.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
+                                <div>{value.refreshing ? <CircularProgress disableShrink={true} size='16px' className='refreshIcon' /> : <RefreshIcon className='refreshIcon' />}</div>
                                 <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
                               </button>
                             </div>
