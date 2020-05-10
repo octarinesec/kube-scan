@@ -1,10 +1,7 @@
-import React, {useEffect, useContext} from 'react';
-import {Link} from 'react-router';
+import React from 'react';
 import App, {DataContext} from './App';
 import './Risk.scss';
-import OCTableCell from "./components/CommonTable/OCTableCell";
 import K8sRisksTable from "./components/Risk/K8sRisksTable";
-import { parseK8sRisksWorkloads } from "@octarine/ui-common";
 import RefreshIcon from '@material-ui/icons/Refresh';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -17,7 +14,7 @@ function Risk() {
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
                             <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
-                              {value.refreshing ? (<CircularProgress size='16px' className='refreshIcon' />) : (<RefreshIcon className='refreshIcon' />)}
+                              <div>{value.refreshing ? <CircularProgress disableShrink={true} size='16px' className='refreshIcon' /> : <RefreshIcon className='refreshIcon' />}</div>
                               <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
                             </button>
                         </div>
