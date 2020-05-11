@@ -1,5 +1,5 @@
 .Risk {
-  padding: 0 40px;
+  padding: 0 20px;
 
   .risks-include-system-ns {
     .switch-label {
@@ -61,7 +61,7 @@
 
   .Home-header {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
 
     h2 {
       font-weight: 100;
@@ -71,8 +71,6 @@
     }
 
     .right-controls {
-      position: absolute;
-      right: 20px;
       display: flex;
       .refresh-state-btn {
         margin: 20px 10px;
