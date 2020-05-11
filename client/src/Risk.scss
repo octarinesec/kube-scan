@@ -1,6 +1,64 @@
 .Risk {
   padding: 0 40px;
 
+  .risks-include-system-ns {
+    .switch-label {
+      font-family: "Poppins", sans-serif;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .switch-root {
+      width: 36px;
+      height: 14px;
+      display: flex;
+      padding: 0;
+      overflow: visible;
+      margin-right: 5px;
+    }
+
+    .switch-base {
+      padding: 1px 0 0 1px;
+    }
+
+    .switch-track {
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      border-radius: 50px;
+      border: 1px solid #ccc;
+    }
+
+    .switch-checked + .switch-track {
+      background-color: var(--oc-primary-bg-color);
+      border-color: var(--oc-primary-bg-color);
+      opacity: 1;
+    }
+
+    .switch-checked {
+      color: white;
+    }
+
+    .switch-thumb {
+      width: 14px;
+      height: 14px;
+      box-shadow: none;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .switch-input {
+      top: 0;
+      cursor: inherit;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      padding: 0;
+      z-index: 1;
+      position: absolute;
+    }
+  }
+
   .Home-header {
     display: flex;
     align-items: center;
@@ -12,21 +70,23 @@
       margin-bottom: 0;
     }
 
-    .refresh-state-btn {
+    .right-controls {
       position: absolute;
       right: 20px;
-      margin: 20px 10px;
-      padding: 6px 10px;
-      border: solid 1px white;
-      background-color: #5e4c73;
-      font-size: 14px;
-      border-radius: 4px;
-      color: #e4e0e8;
-      text-decoration: none;
       display: flex;
-      align-items: center;
-      width: 125px;
-      text-align: right;
+      .refresh-state-btn {
+        margin: 20px 10px;
+        padding: 6px 10px;
+        border: solid 1px white;
+        background-color: #5e4c73;
+        font-size: 14px;
+        border-radius: 4px;
+        color: #e4e0e8;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        width: 125px;
+        text-align: right;
 
       .refreshIcon {
         font-size: 18px;
@@ -38,19 +98,22 @@
         padding-bottom: 4px;
       }
 
-      &:hover {
-        cursor: pointer;
-        background-color: #451d73;
+        &:hover {
+          cursor: pointer;
+          background-color: #451d73;
+        }
+
+        &:focus {
+          outline: 0;
+        }
+
+        &:disabled {
+          cursor: default;
+          background: gray;
+        }
       }
 
-      &:focus {
-        outline: 0;
-      }
 
-      &:disabled {
-        cursor: default;
-        background: gray;
-      }
     }
   }
 

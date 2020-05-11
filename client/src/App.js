@@ -48,12 +48,13 @@ function App(props) {
   const [risksData, setRisksData] = useState(null);
   const [sortField, setSortField] = useState("risk.riskScore");
   const [ascending, setAscending] = useState(false);
+  const [selectedShowSystemNamespaces, setSelectedShowSystemNamespaces] = useState(false)
   const [popupData, setPopupData] = useState(null);
 
   async function fetchData() {
     const result = await fetch("/api/risks");
     const {data} = await result.json();
-    setRisksData(parseK8sRisksWorkloads(data))
+    setRisksData(data)
   }
 
   async function updateRefreshingStatus(lastFetch) {
@@ -89,6 +90,10 @@ function App(props) {
 
   let risks = risksData ? [...risksData] : null
   if (risks) {
+    if (!selectedShowSystemNamespaces) {
+      risks = risks.filter(r => !r.isSystemWorkload)
+    }
+    risks = parseK8sRisksWorkloads(risks)
     risks.sort(sortData(sortField, ascending))
   }
 
@@ -103,7 +108,7 @@ function App(props) {
     <div className={ cNames }>
       <Toolbar contactLink={ runtimeConfig.contactLink } />
       <div className="app-main-row">
-        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing} }>
+        <DataContext.Provider value={ {risks, sortField, ascending, sortFunc, openPopup, refreshState, refreshing, selectedShowSystemNamespaces, setSelectedShowSystemNamespaces} }>
           <div className="current-page-wrapper">{ props.children }</div>
         </DataContext.Provider>
       </div>

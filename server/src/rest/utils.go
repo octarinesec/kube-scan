@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"github.com/toolkits/slice"
 	"kube-scan/risk"
 	"kube-scan/state"
 )
@@ -17,8 +18,9 @@ func GetClusterRiskWorkloads(cluster *state.Cluster) risk.WorkloadRiskDataList {
 	result := make([]*risk.WorkloadRiskData, 0)
 
 	for _, namespace := range cluster.Namespaces {
+		isSystemNamespace := slice.ContainsString(state.SystemNamespaces, namespace.Name)
 		for _, workload := range namespace.GetAllRiskWorkloads() {
-			result = append(result, risk.ToWorkloadRiskData(workload))
+			result = append(result, risk.ToWorkloadRiskData(workload, isSystemNamespace))
 		}
 	}
 

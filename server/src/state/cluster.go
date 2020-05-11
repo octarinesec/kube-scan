@@ -110,14 +110,7 @@ func (cluster *Cluster) deleteSystemPodsAndContainers() {
 	}
 }
 
-func (cluster *Cluster) deleteSystemsNamespaces() {
-	for _, namespace := range SystemNamespaces {
-		delete(cluster.Namespaces, namespace)
-	}
-}
-
 func (cluster *Cluster) DeleteSystemData() {
-	cluster.deleteSystemsNamespaces()
 	cluster.deleteSystemPodsAndContainers()
 	cluster.deleteEnvNamespaces()
 }
