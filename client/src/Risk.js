@@ -1,9 +1,9 @@
-import React, {useEffect, useContext} from 'react';
-import {Link} from 'react-router';
+import React from 'react';
 import App, {DataContext} from './App';
 import './Risk.scss';
-import OCTableCell from "./components/CommonTable/OCTableCell";
 import K8sRisksTable from "./components/Risk/K8sRisksTable";
+import RefreshIcon from '@material-ui/icons/Refresh';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Risk() {
     return (
@@ -13,12 +13,17 @@ function Risk() {
                     <div className="Risk oc-main-page">
                         <div className="Home-header">
                             <h2>K8S Risk Assessment</h2>
+                            <button disabled={value.refreshing} onClick={value.refreshState} className='refresh-state-btn'>
+                              <div>{value.refreshing ? <CircularProgress disableShrink={true} size='16px' className='refreshIcon' /> : <RefreshIcon className='refreshIcon' />}</div>
+                              <span>{value.refreshing ? "Refreshing..." : "Refresh"}</span>
+                            </button>
                         </div>
                         <K8sRisksTable
-                            risks={value.state ? value.state['data']:null}
-                            dispatch={value.dispatch}
-                            currentSort={value.state ? value.state['sortField']:null}
-                            ascending={value.state ? value.state['ascending']:null}
+                            risks={value.risks}
+                            openPopup={value.openPopup}
+                            sortFunc={value.sortFunc}
+                            currentSort={value.sortField}
+                            ascending={value.ascending}
                         />
                     </div>
                 )}
