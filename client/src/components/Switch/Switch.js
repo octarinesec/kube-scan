@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormControlLabel } from '@material-ui/core'
 import MuiSwitch from '@material-ui/core/Switch'
-import classNames from 'classnames';
 
 function Switch(props) {
   const {label, isChecked, onChange, className} = props

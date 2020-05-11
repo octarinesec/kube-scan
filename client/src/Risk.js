@@ -4,7 +4,7 @@ import './Risk.scss';
 import K8sRisksTable from "./components/Risk/K8sRisksTable";
 import RefreshIcon from '@material-ui/icons/Refresh';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Switch from "./components/Switch";
+import Switch from "./components/Switch/Switch";
 
 function Risk() {
     return (
