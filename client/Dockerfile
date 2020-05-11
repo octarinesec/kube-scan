@@ -1,7 +1,7 @@
 # ----------------
 # STEP 1:
 # build with pkg
-FROM node:latest AS build
+FROM node:12.16.2-alpine AS build
 WORKDIR /app
 
 # install dependencies with cache
