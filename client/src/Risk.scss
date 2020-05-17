@@ -37,6 +37,10 @@
 
     .switch-checked {
       color: white;
+
+      .switch-thumb {
+        left: 20px;
+      }
     }
 
     .switch-thumb {
@@ -45,6 +49,9 @@
       box-shadow: none;
       border-radius: 50%;
       background-color: currentColor;
+      top: 1.5px;
+      left: 1px;
+      position: absolute;
     }
 
     .switch-input {
