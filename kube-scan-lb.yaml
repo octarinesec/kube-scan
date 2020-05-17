@@ -457,7 +457,7 @@ spec:
     spec:
       containers:
         - name: kube-scan-ui
-          image: octarinesec/kubescan-scanner-ui:20.1.1
+          image: octarinesec/kubescan-scanner-ui:20.5
           imagePullPolicy: Always
           env:
             - name: API_SERVER_PORT
@@ -474,7 +474,7 @@ spec:
               value: "/etc/kubescan/risk-config.yaml"
             - name: KUBESCAN_REFRESH_STATE_INTERVAL_MINUTES
               value: "1440"
-          image: octarinesec/kubescan-scanner:20.1.1
+          image: octarinesec/kubescan-scanner:20.5
           imagePullPolicy: Always
           volumeMounts:
             - name: config
