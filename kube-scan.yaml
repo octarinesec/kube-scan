@@ -33,7 +33,7 @@ data:
       riskCategory:
         min: 0
         low: 3
-        medium: 7
+        medium: 6
         max: 10
       individualRiskCategory:
         min: 0
