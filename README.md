@@ -43,8 +43,11 @@ Then set your browser to that address.
 
 ## Using the API
 If you applied kube-scan to your cluster with the load balancer service:
+
 "HOST" refers to the external ip of the service.
+
 If you used port-forward:
+
 "HOST" refers to "localhost:8080" 
 
 Getting all of the risks in your cluster:
@@ -52,7 +55,7 @@ Getting all of the risks in your cluster:
 GET http://HOST/api/risks
 ```
 
-Requesting the kube-scan service to calculate again the risks:
+Requesting the kube-scan service to calculate again the risks (in case a resource was changed):
 ```
 POST http://HOST/api/refresh
 ```
