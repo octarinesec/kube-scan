@@ -42,9 +42,10 @@ depending on the load-balancer type.
 Then set your browser to that address.
 
 ## Using the API
-If you applied kube-scan to your cluster with the load balancer service
+If you applied kube-scan to your cluster with the load balancer service:
 "HOST" refers to the external ip of the service.
-If you used port-forward, "HOST" refers to "localhost:8080" 
+If you used port-forward:
+"HOST" refers to "localhost:8080" 
 
 Getting all of the risks in your cluster:
 ```
