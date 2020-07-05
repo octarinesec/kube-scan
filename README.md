@@ -41,6 +41,24 @@ depending on the load-balancer type.
 
 Then set your browser to that address.
 
+## Using the API
+
+
+Getting all of the risks in your cluster:
+```
+GET http://HOST/api/risks
+```
+
+Requesting the kube-scan service to calculate again the risks:
+```
+POST http://HOST/api/refresh
+```
+
+This might be a long operation - depending on the cluster size, so you can pull the refresh operation status:
+```
+GET http://HOST/api/refreshing_status
+```
+
 ## Building from source code
 Build the server image (from root folder)
 ```bash
