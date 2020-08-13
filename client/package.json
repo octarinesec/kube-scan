@@ -27,7 +27,7 @@
     "react-router": "^3.2.0",
     "react-router-scroll": "0.4.2",
     "react-virtualized": "9.21.1",
-    "serialize-javascript": "^2.1.2"
+    "serialize-javascript": "^3.1.0"
   },
   "devDependencies": {
     "pkg": "^4.3.7",
