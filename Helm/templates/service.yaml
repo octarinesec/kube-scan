@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "ms.fullname" . }}
+  labels:
+    app: {{ template "ms.name" . }}
+spec:
+  ports:
+    - name: {{ template "ms.name" . }}-ui
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: {{ template "ms.name" . }}
+  type: {{ .Values.serviceType.type }}

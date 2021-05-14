@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "ms.fullname" . }}
+  labels:
+    app: {{ template "ms.name" . }}
+    chart: {{ template "ms.chart" .  }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "ms.name" . }}
+  template:
+    metadata:
+      labels:
+{{- if .Values.deployment.labels }}
+{{ toYaml .Values.deployment.labels | indent 8 }}
+{{- end }}
+        app: {{ template "ms.name" . }}
+    spec:
+{{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
+      containers:
+        - name: {{ template "ms.name" . }}-ui
+          image: "{{ .Values.image.ui.repository }}:{{ .Values.image.ui.tag }}"
+          imagePullPolicy: {{ .Values.image.ui.pullPolicy }}
+          env:
+            - name: API_SERVER_PORT
+              value: "{{ .Values.ports.apiPort }}"
+            - name: CONTACT_LINK
+              value: "mailto:info@octarinesec.com?subject=Octarine%20Contact%20Request"
+            - name: WEBSITE_LINK
+              value: "https://www.octarinesec.com"
+        - name: {{ template "ms.name" . }}
+          env:
+            - name: KUBESCAN_PORT
+              value: "{{ .Values.ports.kubeScanPort }}"
+            - name: KUBESCAN_RISK_CONFIG_FILE_PATH
+              value: "/etc/kubescan/risk-config.yaml"
+            - name: KUBESCAN_REFRESH_STATE_INTERVAL_MINUTES
+              value: "{{ .Values.refreshStateInterval }}"
+          image: "{{ .Values.image.scanner.repository }}:{{ .Values.image.scanner.tag }}"
+          imagePullPolicy: {{ .Values.image.scanner.pullPolicy }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/kubescan
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "ms.fullname" . }}
+            defaultMode: 420
+      serviceAccountName: {{ template "ms.fullname" . }}
