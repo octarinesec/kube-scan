@@ -1,0 +1,42 @@
+deployment:
+  ## Any labels required for the pods
+  labels:
+  ## Any annotations required for the pods
+  annotations:
+  ## Node selector for pods
+  nodeSelector:
+
+## Image Specifications
+image:
+  ui:
+    repository: octarinesec/kubescan-scanner-ui
+    tag: "20.5"
+    pullPolicy: IfNotPresent
+  scanner:
+    repository: octarinesec/kubescan-scanner
+    tag: "20.5"
+    pullPolicy: IfNotPresent
+
+# Ports for kubescan
+ports:
+  apiPort: 80
+  kubeScanPort: 80
+
+# Refresh interval in minutes
+refreshStateInterval: 1440
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  labels: {}
+  host: chart.example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+## The service type - Only Switch to LoadBalancer if you are not using the ingress.
+serviceType:
+  type: ClusterIP

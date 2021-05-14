@@ -1,0 +1,7 @@
+apiVersion: v1
+description: Octarine k8s cluster risk assessment tool
+maintainers:
+name: kube-scan
+sources:
+version: 0.0.2
+appVersion: 20.5

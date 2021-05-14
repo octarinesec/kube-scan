@@ -1,0 +1,3 @@
+Successfully Deployed
+Service Name: {{ template "ms.fullname" . }}
+To access internally please run: kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ template "ms.fullname" . }} 8080:80 and then go to http://localhost:8080
