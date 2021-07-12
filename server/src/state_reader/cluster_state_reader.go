@@ -82,7 +82,7 @@ func NewClusterStateReader() (*ClusterStateReader, error) {
 func (reader *ClusterStateReader) ReadClusterState(prevState *state.Cluster) (*state.Cluster, error) {
 	clusterState := state.NewState("current_state")
 
-	namespaces, err := reader.kubeClient.CoreV1().Namespaces().List(metav1.ListOptions{})
+	namespaces, err := reader.kubeClient.CoreV1().Namespaces().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func (reader *ClusterStateReader) ReadClusterState(prevState *state.Cluster) (*s
 		return nil, err
 	}
 
-	clusterRoleBindings, err := reader.kubeClient.RbacV1().ClusterRoleBindings().List(metav1.ListOptions{})
+	clusterRoleBindings, err := reader.kubeClient.RbacV1().ClusterRoleBindings().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, err
 	}
@@ -114,7 +114,7 @@ func (reader *ClusterStateReader) ReadClusterState(prevState *state.Cluster) (*s
 }
 
 func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevState *state.Cluster, namespace v1.Namespace) error {
-	deployments, err := reader.kubeClient.AppsV1().Deployments(namespace.Name).List(metav1.ListOptions{})
+	deployments, err := reader.kubeClient.AppsV1().Deployments(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		deployment.APIVersion = "apps/v1"
 		clusterState.Update(reader.deploymentTracker.TrackDeployment(deployment))
 	}
-	replicaSets, err := reader.kubeClient.AppsV1().ReplicaSets(namespace.Name).List(metav1.ListOptions{})
+	replicaSets, err := reader.kubeClient.AppsV1().ReplicaSets(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -235,3 +235,4 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 	}
 	return nil
 }
+{"mode":"full","isActive":false}
