@@ -141,7 +141,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		rc.APIVersion = "core/v1"
 		clusterState.Update(reader.replicationControllerTracker.TrackReplicationController(rc))
 	}
-	statefulSets, err := reader.kubeClient.AppsV1().StatefulSets(namespace.Name).List(metav1.ListOptions{})
+	statefulSets, err := reader.kubeClient.AppsV1().StatefulSets(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -150,7 +150,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		statefulSet.APIVersion = "apps/v1"
 		clusterState.Update(reader.statefulSetTracker.TrackStatefulset(statefulSet))
 	}
-	daemonSets, err := reader.kubeClient.AppsV1().DaemonSets(namespace.Name).List(metav1.ListOptions{})
+	daemonSets, err := reader.kubeClient.AppsV1().DaemonSets(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -159,7 +159,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		daemonSet.APIVersion = "apps/v1"
 		clusterState.Update(reader.daemonsetTracker.TrackDaemonset(daemonSet))
 	}
-	jobs, err := reader.kubeClient.BatchV1().Jobs(namespace.Name).List(metav1.ListOptions{})
+	jobs, err := reader.kubeClient.BatchV1().Jobs(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -171,7 +171,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		job.APIVersion = "batch/v1"
 		clusterState.Update(reader.jobTracker.TrackJob(job))
 	}
-	cronJobs, err := reader.kubeClient.BatchV1beta1().CronJobs(namespace.Name).List(metav1.ListOptions{})
+	cronJobs, err := reader.kubeClient.BatchV1beta1().CronJobs(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -180,7 +180,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		cronJob.APIVersion = "batch/v1beta1"
 		clusterState.Update(reader.cronJobTracker.TrackCronJob(cronJob))
 	}
-	services, err := reader.kubeClient.CoreV1().Services(namespace.Name).List(metav1.ListOptions{})
+	services, err := reader.kubeClient.CoreV1().Services(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -189,7 +189,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		service.APIVersion = "core/v1"
 		clusterState.Update(reader.serviceTracker.TrackService(service))
 	}
-	networkPolicies, err := reader.kubeClient.NetworkingV1().NetworkPolicies(namespace.Name).List(metav1.ListOptions{})
+	networkPolicies, err := reader.kubeClient.NetworkingV1().NetworkPolicies(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -198,7 +198,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		networkPolicy.APIVersion = "networking/v1"
 		clusterState.Update(reader.networkPolicyTracker.TrackNetworkPolicy(networkPolicy))
 	}
-	ingresses, err := reader.kubeClient.ExtensionsV1beta1().Ingresses(namespace.Name).List(metav1.ListOptions{})
+	ingresses, err := reader.kubeClient.ExtensionsV1beta1().Ingresses(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -207,7 +207,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		ingress.APIVersion = "extensions/v1beta1"
 		clusterState.Update(reader.ingressControllerTracker.TrackIngress(ingress))
 	}
-	pods, err := reader.kubeClient.CoreV1().Pods(namespace.Name).List(metav1.ListOptions{})
+	pods, err := reader.kubeClient.CoreV1().Pods(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
@@ -224,7 +224,7 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 		pod.APIVersion = "core/v1"
 		clusterState.Update(reader.podTracker.TrackPod(pod))
 	}
-	roleBindings, err := reader.kubeClient.RbacV1().RoleBindings(namespace.Name).List(metav1.ListOptions{})
+	roleBindings, err := reader.kubeClient.RbacV1().RoleBindings(namespace.Name).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
