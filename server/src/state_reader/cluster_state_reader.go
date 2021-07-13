@@ -235,4 +235,3 @@ func (reader *ClusterStateReader) readNsState(clusterState *state.Cluster, prevS
 	}
 	return nil
 }
-{"mode":"full","isActive":false}
