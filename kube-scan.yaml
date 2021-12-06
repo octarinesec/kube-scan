@@ -28,7 +28,7 @@ data:
         cluster: 1
       ciaScore:
         high: 0.56
-        low: 0.22
+        low: 0.23
         none: 0
       riskCategory:
         min: 0
