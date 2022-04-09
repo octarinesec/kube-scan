@@ -17,7 +17,7 @@
     "css-loader": "1.0.1",
     "express": "^4.16.2",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.6.1",
     "razzle": "^3.0.0",
