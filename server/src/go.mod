@@ -6,10 +6,9 @@ require (
 	github.com/containerd/containerd v1.3.2 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.4.2-0.20200118013135-45a38feb019e
-	github.com/gin-gonic/gin v1.5.0
+	github.com/gin-gonic/gin v1.7.0
 	github.com/go-bongo/bongo v0.10.4
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
-	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/maxwellhealth/go-dotaccess v0.0.0-20190924013105-74ea4f4ca4eb // indirect
 	github.com/oleiade/reflections v1.0.0 // indirect
@@ -23,7 +22,8 @@ require (
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
 	google.golang.org/grpc v1.26.0 // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
-	gopkg.in/yaml.v2 v2.2.7
+	gopkg.in/yaml.v2 v2.2.8
+	gotest.tools v2.2.0+incompatible // indirect
 	k8s.io/api v0.17.1
 	k8s.io/apimachinery v0.17.1
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
